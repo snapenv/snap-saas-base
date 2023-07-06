@@ -20,6 +20,8 @@ version_files = ["pyproject.toml:version"]
 [tool.poetry.dependencies]  # https://python-poetry.org/docs/dependency-specification/
 pydantic = ">=1.10.7"
 python = ">=3.11,<4.0"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.18"}
+cuid = "^0.4"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
 black = ">=23.3.0"
