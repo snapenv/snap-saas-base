@@ -7,32 +7,31 @@ from snap_saas_base.models.base_model_postgres import AbstractModel
 
 
 class User(AbstractModel):
-    """User model.
+    """A User class that represents the users table in the database.
 
-    _extended_summary_
-
-    Parameters
+    Attributes
     ----------
-    AbstractModel : AbstractModel
-        Base model
+        __tablename__ (str): The name of the table in the database.
+        username (so.Mapped[str]): The username of the user. This field is not nullable.
+        provider (so.Mapped[str]): The provider of the user. This field is nullable and defaults to "local".
+        email (so.Mapped[str]): The email of the user. This field is nullable.
+        cell_phone (so.Mapped[str]): The cell phone number of the user. This field is nullable and indexed.
+        full_name (so.Mapped[str]): The full name of the user. This field is not nullable.
+        hashed_password (so.Mapped[str]): The hashed password of the user. This field is nullable.
+        is_verified (so.Mapped[bool]): A boolean indicating if the user is verified. This field is not nullable and defaults to False.
+        is_premium (so.Mapped[bool]): A boolean indicating if the user is a premium user. This field is not nullable and defaults to False.
+        is_active (so.Mapped[bool]): A boolean indicating if the user is active. This field defaults to True.
+        is_superuser (so.Mapped[bool]): A boolean indicating if the user is a superuser. This field defaults to False.
+        phone_verified (so.Mapped[bool]): A boolean indicating if the user's phone number is verified. This field defaults to False.
+        __table_args__ (tuple): A tuple containing SQLAlchemy table options.
 
-    Returns
+    Methods
     -------
-    User
-        Return Sqlalchemy uSer model
+        as_dict: Returns a dictionary representation of the User object.
     """
 
     __tablename__ = "users"
     username: so.Mapped[str] = so.mapped_column(nullable=False)
-    """Username
-
-    username used to login in the system
-
-    Returns
-    -------
-    str
-        field value
-    """
     provider: so.Mapped[str] = so.mapped_column(default="local", nullable=True)
     email: so.Mapped[str] = so.mapped_column(nullable=True)
     cell_phone: so.Mapped[str] = so.mapped_column(nullable=True, index=True)
@@ -54,4 +53,10 @@ class User(AbstractModel):
 
     @property
     def as_dict(self):
+        """Returns a dictionary representation of the User object.
+
+        Returns
+        -------
+            dict: A dictionary where the keys are the column names and the values are the corresponding attribute values.
+        """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
