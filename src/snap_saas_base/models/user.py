@@ -7,21 +7,44 @@ from snap_saas_base.models.base_model_postgres import AbstractModel
 
 
 class User(AbstractModel):
-    # Users Table
+    """User model.
+
+    _extended_summary_
+
+    Parameters
+    ----------
+    AbstractModel : AbstractModel
+        Base model
+
+    Returns
+    -------
+    User
+        Return Sqlalchemy uSer model
+    """
+
     __tablename__ = "users"
-    # __mapper_args__ = {"eager_defaults": True}
     username: so.Mapped[str] = so.mapped_column(nullable=False)
+    """Username
+
+    username used to login in the system
+
+    Returns
+    -------
+    str
+        field value
+    """
     provider: so.Mapped[str] = so.mapped_column(default="local", nullable=True)
     email: so.Mapped[str] = so.mapped_column(nullable=True)
     cell_phone: so.Mapped[str] = so.mapped_column(nullable=True, index=True)
     full_name: so.Mapped[str] = so.mapped_column(nullable=False)
-    password: so.Mapped[str] = so.mapped_column(nullable=True)
+    hashed_password: so.Mapped[str] = so.mapped_column(nullable=True)
     is_verified: so.Mapped[bool] = so.mapped_column(
         nullable=False, default=False, server_default=sa.text("false")
     )
     is_premium: so.Mapped[bool] = so.mapped_column(
         nullable=False, default=False, server_default=sa.text("false")
     )
+    is_active: so.Mapped[bool] = so.mapped_column(default=True, server_default=sa.text("true"))
     is_superuser: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
     phone_verified: so.Mapped[bool] = so.mapped_column(
         default=False, server_default=sa.text("false")
