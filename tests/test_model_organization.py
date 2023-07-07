@@ -8,6 +8,7 @@ def test_model_organization() -> None:
     model_data = Organization()
     assert isinstance(model_data.as_dict, dict)
 
+
 def test_model_organization_members() -> None:
     """Test that the model can be used."""
     model_data = OrgMember()

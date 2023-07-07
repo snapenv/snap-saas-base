@@ -1,13 +1,39 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
-
 from snap_saas_base.models.base_model_postgres import AbstractModel
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
 
 class Organization(AbstractModel):
+    """A class used to represent an Organization in the database.
+
+    This class is a subclass of the AbstractModel class and represents the structure of the 'organizations' table in the database.
+
+    Attributes
+    ----------
+    __tablename__ : str
+        The name of the table in the database.
+    name : so.Mapped[str]
+        The name of the organization. This field cannot be null.
+    slug : so.Mapped[str]
+        The slug of the organization. This field cannot be null and must be unique.
+    bucket : so.Mapped[str]
+        The bucket of the organization. This field cannot be null.
+    created_by : so.Mapped[str]
+        The user who created the organization. This field cannot be null and is a foreign key referencing the 'users' table.
+    revoke_link : so.Mapped[bool]
+        A boolean indicating whether the link to the organization has been revoked. The default value is False.
+    org_member : so.WriteOnlyMapped["OrgMember"]
+        A relationship to the OrgMember class, back_populates to 'org', with cascade options set to 'all, delete-orphan'.
+
+    Methods
+    -------
+    as_dict:
+        Returns a dictionary representation of the Organization instance.
+    """
+
     __tablename__ = "organizations"
 
     name: so.Mapped[str] = so.mapped_column(nullable=False)
@@ -24,10 +50,46 @@ class Organization(AbstractModel):
 
     @property
     def as_dict(self):
+        """Returns a dictionary representation of the Organization instance.
+
+        This method iterates over the columns of the 'organizations' table and gets the corresponding attribute value from the Organization instance.
+
+        Returns
+        -------
+        dict
+            A dictionary where the keys are the column names and the values are the corresponding attribute values of the Organization instance.
+        """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 class OrgMember(AbstractModel):
+    """A class used to represent an Organization Member in a database.
+
+    This class is a mapping to the "organizations_members" table in the database. It contains
+    the organization id, member id and role of the member in the organization. It also has a
+    relationship with the Organization class.
+
+    ...
+
+    Attributes
+    ----------
+    __tablename__ : str
+        a string representing the name of the table in the database
+    org_id : so.Mapped[str]
+        a string representing the id of the organization the member belongs to
+    member_id : so.Mapped[str]
+        a string representing the id of the member
+    role : so.Mapped[str]
+        a string representing the role of the member in the organization
+    org : so.Mapped["Organization"]
+        an object representing the organization the member belongs to
+
+    Methods
+    -------
+    as_dict:
+        Returns the object as a dictionary
+    """
+
     __tablename__ = "organizations_members"
 
     org_id: so.Mapped[str] = so.mapped_column(
@@ -46,4 +108,14 @@ class OrgMember(AbstractModel):
 
     @property
     def as_dict(self):
+        """Returns the object as a dictionary.
+
+        This method is used to convert the object into a dictionary, where the keys are the column names
+        and the values are the corresponding attributes of the object.
+
+        Returns
+        -------
+        dict
+            a dictionary representing the object
+        """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
