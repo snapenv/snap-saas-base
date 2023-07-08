@@ -1,6 +1,7 @@
 """Test Snap SAAS Base."""
 from unittest import TestCase
-from snap_saas_base.models.workspace import Workspace, WorkspaceMember, WorkspaceKv
+
+from snap_saas_base.models.workspace import Workspace, WorkspaceKv, WorkspaceMember
 
 
 class WorkspaceModelTest(TestCase):

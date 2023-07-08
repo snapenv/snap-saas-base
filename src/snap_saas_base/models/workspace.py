@@ -1,11 +1,7 @@
 import cuid
-import decimal
-from datetime import datetime
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.sql import func
-
 
 from snap_saas_base.models.base_model_postgres import AbstractModel
 
@@ -40,6 +36,7 @@ class Workspace(AbstractModel):
     __init__(*args, **kwargs):
         Initializes the workspace. If no id is provided, a unique id is generated.
     """
+
     __tablename__ = "workspaces"
     name: so.Mapped[str] = so.mapped_column(nullable=False)
     slug: so.Mapped[str] = so.mapped_column(nullable=False)
@@ -66,7 +63,7 @@ class Workspace(AbstractModel):
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
             kwargs["id"] = cuid.cuid()
-        super(Workspace, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class WorkspaceMember(AbstractModel):
@@ -95,6 +92,7 @@ class WorkspaceMember(AbstractModel):
     __init__(*args, **kwargs):
         Initializes the workspace. If no id is provided, a unique id is generated.
     """
+
     __tablename__ = "workspaces_members"
     workspace_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
@@ -127,7 +125,7 @@ class WorkspaceMember(AbstractModel):
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
             kwargs["id"] = cuid.cuid()
-        super(WorkspaceMember, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
 
 class WorkspaceKv(AbstractModel):
@@ -157,6 +155,7 @@ class WorkspaceKv(AbstractModel):
     __init__(*args, **kwargs):
         Initializes the workspace. If no id is provided, a unique id is generated.
     """
+
     __tablename__ = "workspaces_kv"
     workspace_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
@@ -182,4 +181,4 @@ class WorkspaceKv(AbstractModel):
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
             kwargs["id"] = cuid.cuid()
-        super(WorkspaceKv, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
