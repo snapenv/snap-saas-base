@@ -1,3 +1,4 @@
+import cuid
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
@@ -7,27 +8,44 @@ from snap_saas_base.models.base_model_postgres import AbstractModel
 
 
 class User(AbstractModel):
-    """A User class that represents the users table in the database.
+    """
+    A class used to represent a User in the system.
+
+    ...
 
     Attributes
     ----------
-        __tablename__ (str): The name of the table in the database.
-        username (so.Mapped[str]): The username of the user. This field is not nullable.
-        provider (so.Mapped[str]): The provider of the user. This field is nullable and defaults to "local".
-        email (so.Mapped[str]): The email of the user. This field is nullable.
-        cell_phone (so.Mapped[str]): The cell phone number of the user. This field is nullable and indexed.
-        full_name (so.Mapped[str]): The full name of the user. This field is not nullable.
-        hashed_password (so.Mapped[str]): The hashed password of the user. This field is nullable.
-        is_verified (so.Mapped[bool]): A boolean indicating if the user is verified. This field is not nullable and defaults to False.
-        is_premium (so.Mapped[bool]): A boolean indicating if the user is a premium user. This field is not nullable and defaults to False.
-        is_active (so.Mapped[bool]): A boolean indicating if the user is active. This field defaults to True.
-        is_superuser (so.Mapped[bool]): A boolean indicating if the user is a superuser. This field defaults to False.
-        phone_verified (so.Mapped[bool]): A boolean indicating if the user's phone number is verified. This field defaults to False.
-        __table_args__ (tuple): A tuple containing SQLAlchemy table options.
+    __tablename__ : str
+        a string representing the name of the table in the database
+    username : so.Mapped[str]
+        a string representing the username of the user, cannot be null
+    provider : so.Mapped[str]
+        a string representing the provider of the user, default is "local"
+    email : so.Mapped[str]
+        a string representing the email of the user
+    cell_phone : so.Mapped[str]
+        a string representing the cell phone number of the user
+    full_name : so.Mapped[str]
+        a string representing the full name of the user, cannot be null
+    hashed_password : so.Mapped[str]
+        a string representing the hashed password of the user
+    is_verified : so.Mapped[bool]
+        a boolean indicating whether the user is verified, default is False
+    is_premium : so.Mapped[bool]
+        a boolean indicating whether the user is a premium user, default is False
+    is_active : so.Mapped[bool]
+        a boolean indicating whether the user is active, default is True
+    is_superuser : so.Mapped[bool]
+        a boolean indicating whether the user is a superuser, default is False
+    phone_verified : so.Mapped[bool]
+        a boolean indicating whether the user's phone is verified, default is False
 
     Methods
     -------
-        as_dict: Returns a dictionary representation of the User object.
+    as_dict:
+        Returns the user's attributes as a dictionary
+    __init__(*args, **kwargs):
+        Initializes the workspace. If no id is provided, a unique id is generated.
     """
 
     __tablename__ = "users"
@@ -53,10 +71,16 @@ class User(AbstractModel):
 
     @property
     def as_dict(self):
-        """Returns a dictionary representation of the User object.
+        """Returns the user's attributes as a dictionary.
 
         Returns
         -------
-            dict: A dictionary where the keys are the column names and the values are the corresponding attribute values.
+        dict
+            a dictionary containing the user's attributes
         """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __init__(self, *args, **kwargs):
+        if "id" not in kwargs:
+            kwargs["id"] = cuid.cuid()
+        super().__init__(*args, **kwargs)
