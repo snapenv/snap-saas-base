@@ -1,3 +1,4 @@
+import cuid
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 
@@ -32,6 +33,8 @@ class Organization(AbstractModel):
     -------
     as_dict:
         Returns a dictionary representation of the Organization instance.
+    __init__(*args, **kwargs):
+        Initializes the workspace. If no id is provided, a unique id is generated.
     """
 
     __tablename__ = "organizations"
@@ -61,6 +64,11 @@ class Organization(AbstractModel):
         """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
+    def __init__(self, *args, **kwargs):
+        if "id" not in kwargs:
+            kwargs["id"] = cuid.cuid()
+        super().__init__(*args, **kwargs)
+
 
 class OrgMember(AbstractModel):
     """A class used to represent an Organization Member in a database.
@@ -88,6 +96,8 @@ class OrgMember(AbstractModel):
     -------
     as_dict:
         Returns the object as a dictionary
+    __init__(*args, **kwargs):
+        Initializes the workspace. If no id is provided, a unique id is generated.
     """
 
     __tablename__ = "organizations_members"
@@ -119,3 +129,8 @@ class OrgMember(AbstractModel):
             a dictionary representing the object
         """
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __init__(self, *args, **kwargs):
+        if "id" not in kwargs:
+            kwargs["id"] = cuid.cuid()
+        super().__init__(*args, **kwargs)
