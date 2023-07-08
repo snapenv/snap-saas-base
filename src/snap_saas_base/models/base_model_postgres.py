@@ -15,16 +15,30 @@ db_naming_convention = {
 # https://blog.miguelgrinberg.com/post/what-s-new-in-sqlalchemy-2-0
 
 
-# class AbstractModel(Base):
 class AbstractModel(so.DeclarativeBase):
-    """Base Models.
+    """Abstract base class for SQLAlchemy models. This class provides common
+    attributes and methods for all models.
 
-    Args:
-        Base (_type_): Inherits Base from SQLAlchemy and specifies columns for inheritance.
+    Attributes
+    ----------
+    __abstract__ : bool
+        SQLAlchemy attribute to indicate that this is an abstract base class.
+    metadata : sa.MetaData
+        SQLAlchemy MetaData instance with a naming convention.
+    id : so.Mapped[str]
+        Unique identifier for each instance, non-nullable and auto-generated.
+    created_at : so.Mapped[datetime]
+        Timestamp of when the instance was created, non-nullable and auto-generated.
+    updated_at : so.Mapped[datetime]
+        Timestamp of when the instance was last updated, non-nullable and auto-updated.
+
+    Note:
+        The `id` attribute uses the `cuid.cuid` function to generate a unique identifier.
+        The `created_at` and `updated_at` attributes use the `datetime.utcnow` function to generate timestamps.
+        The `updated_at` attribute is also updated every time the instance is updated.
     """
 
     __abstract__ = True
-    # metadata: sa.MetaData = sa.MetaData(naming_convention=db_naming_convention)
     metadata: sa.MetaData = sa.MetaData(naming_convention=db_naming_convention)  # type: ignore
 
     id: so.Mapped[str] = so.mapped_column(nullable=False, default=cuid.cuid, primary_key=True)
