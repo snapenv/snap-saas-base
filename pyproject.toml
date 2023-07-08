@@ -18,10 +18,10 @@ version = "0.0.0"
 version_files = ["pyproject.toml:version"]
 
 [tool.poetry.dependencies]  # https://python-poetry.org/docs/dependency-specification/
-pydantic = ">=1.10.7"
 python = ">=3.11,<4.0"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.18"}
 cuid = "^0.4"
+pydantic = ">=1.0.0,<2.0.0"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
 black = ">=23.3.0"
@@ -40,6 +40,7 @@ ruff = ">=0.0.270"
 cruft = ">=2.14.0"
 pdoc = ">=13.1.1"
 gpt4docstrings = "^0.0.6"
+bump-pydantic = "^0.1.0"
 
 [tool.black]  # https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html#configuration-via-a-file
 line-length = 100
