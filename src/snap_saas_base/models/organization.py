@@ -46,10 +46,16 @@ class Organization(AbstractModel):
         sa.ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
     revoke_link: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
-    org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
-        back_populates="org", cascade="all, delete-orphan"
+    # org_memberxx: so.WriteOnlyMapped["OrgMember"] = so.relationship(
+    #     back_populates="org", cascade="all, delete-orphan"
+    # )
+    # org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
+    org_member = so.relationship(
+        "OrgMember", back_populates="org", lazy="raise", passive_deletes=True
     )
     # org_workspaces: so.WriteOnlyMapped["Workspace"] = so.relationship(back_populates="org", cascade="all, delete-orphan")
+
+    __mapper_args__ = {"eager_defaults": True}
 
     @property
     def as_dict(self):
@@ -110,7 +116,11 @@ class OrgMember(AbstractModel):
     )
     role: so.Mapped[str] = so.mapped_column(nullable=False)
     # member: so.Mapped["User"] = so.relationship(back_populates="org_member")
-    org: so.Mapped["Organization"] = so.relationship(back_populates="org_member")
+    # org: so.Mapped["Organization"] = so.relationship(back_populates="org_member")
+    org = so.relationship("Organization", back_populates="org_member", uselist=False, lazy="raise")
+    # member: so.Mapped["User"] = so.relationship(back_populates="org_member")
+
+    __mapper_args__ = {"eager_defaults": True}
 
     __table_args__ = (
         sa.Index("ix_organizations_members_org_id_member_id_role", "org_id", "member_id", "role"),
