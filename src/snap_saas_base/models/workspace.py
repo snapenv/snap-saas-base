@@ -3,7 +3,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from sqlalchemy.dialects.postgresql import JSONB
 
-from snap_saas_base.models.base_model_postgres import AbstractModel
+from snap_saas_base.models.base_model import AbstractModel
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
