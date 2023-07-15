@@ -61,4 +61,4 @@ The following development environments are supported:
 </details>
 
 * opencommit
-* 
+* v0.0.5
