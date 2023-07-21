@@ -54,6 +54,7 @@ class User(AbstractModel):
     email: so.Mapped[str] = so.mapped_column(nullable=True)
     cell_phone: so.Mapped[str] = so.mapped_column(nullable=True, index=True)
     full_name: so.Mapped[str] = so.mapped_column(nullable=False)
+    avatar: so.Mapped[str] = so.mapped_column(nullable=True)
     hashed_password: so.Mapped[str] = so.mapped_column(nullable=True)
     is_verified: so.Mapped[bool] = so.mapped_column(
         nullable=False, default=False, server_default=sa.text("false")
