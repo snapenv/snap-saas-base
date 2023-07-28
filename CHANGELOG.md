@@ -1,3 +1,9 @@
+## v0.6.0 (2023-07-28)
+
+### Feat
+
+- **uuid7**: change UUID generator from cuid to UUID7
+
 ## v0.5.0 (2023-07-21)
 
 ## v0.4.1 (2023-07-15)
