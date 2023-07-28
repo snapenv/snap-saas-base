@@ -1,6 +1,6 @@
-import cuid
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+import uuid6
 from sqlalchemy.dialects.postgresql import JSONB
 
 from snap_saas_base.models.base_model import AbstractModel
@@ -62,7 +62,7 @@ class Workspace(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = cuid.cuid()
+            kwargs["id"] = uuid6.uuid7()
         super().__init__(*args, **kwargs)
 
 
@@ -124,7 +124,7 @@ class WorkspaceMember(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = cuid.cuid()
+            kwargs["id"] = uuid6.uuid7()
         super().__init__(*args, **kwargs)
 
 
@@ -180,5 +180,5 @@ class WorkspaceKv(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = cuid.cuid()
+            kwargs["id"] = uuid6.uuid7()
         super().__init__(*args, **kwargs)

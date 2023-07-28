@@ -1,8 +1,8 @@
 from datetime import datetime
 
-import cuid
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+import uuid6
 
 db_naming_convention = {
     "ix": "ix_%(column_0_label)s",
@@ -41,7 +41,7 @@ class AbstractModel(so.DeclarativeBase):
     __abstract__ = True
     metadata: sa.MetaData = sa.MetaData(naming_convention=db_naming_convention)  # type: ignore
 
-    id: so.Mapped[str] = so.mapped_column(nullable=False, default=cuid.cuid, primary_key=True)
+    id: so.Mapped[str] = so.mapped_column(nullable=False, default=uuid6.uuid7, primary_key=True)
     created_at: so.Mapped[datetime] = so.mapped_column(
         sa.DateTime(timezone=False),
         nullable=False,

@@ -1,6 +1,6 @@
-import cuid
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+import uuid6
 
 from snap_saas_base.models.base_model import AbstractModel
 
@@ -72,7 +72,7 @@ class Organization(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = cuid.cuid()
+            kwargs["id"] = uuid6.uuid7()
         super().__init__(*args, **kwargs)
 
 
@@ -142,5 +142,5 @@ class OrgMember(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = cuid.cuid()
+            kwargs["id"] = uuid6.uuid7()
         super().__init__(*args, **kwargs)
