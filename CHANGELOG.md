@@ -1,3 +1,26 @@
+## v0.6.0 (2023-08-31)
+
+### ✨ Features
+
+- **schemas**: add User schema
+
+### feat
+
+- **uuid7**: change UUID generator from cuid to UUID7
+
+### 📌➕⬇️ ➖⬆️  Dependencies
+
+- upgrade packages
+- upgrade Pydantic to version 2 and add some other packages
+
+### 🗃️ Database
+
+- **models**: remove is_premiun field
+
+### 🚨 Linting
+
+- fix lint errors
+
 ## v0.5.0 (2023-07-21)
 
 ## v0.4.1 (2023-07-15)
