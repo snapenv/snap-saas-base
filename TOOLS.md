@@ -62,3 +62,4 @@ The following development environments are supported:
 
 * opencommit
 * v0.0.5
+* https://github.com/ljnsn/cz-conventional-gitmoji

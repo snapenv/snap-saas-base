@@ -19,7 +19,7 @@ class UserBaseSchemaTest(TestCase):
             "is_verified": True,
             "is_active": True,
             "is_superuser": False,
-            "password": "SomeGoodPassword"
+            "password": "SomeGoodPassword",
         }
 
     def test_creation(self) -> None:

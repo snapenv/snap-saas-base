@@ -139,193 +139,144 @@
                     <h1 class="modulename">
 <a href="./../../snap_saas_base.html">snap_saas_base</a><wbr>.<a href="./../schemas.html">schemas</a><wbr>.user    </h1>
 
-                        <div class="docstring"><p>User schema</p>
+                        <div class="docstring"><p>User schema.</p>
 </div>
 
                         <input id="mod-user-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-user-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="sd">User schema</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a><span class="c1"># from operator import le</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">Field</span><span class="p">,</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">ConfigDict</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a>
-</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a><span class="c1"># Schemas</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a><span class="k">class</span> <span class="nc">UserBaseSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;User Login&quot;</span><span class="p">,</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Username used in login.&quot;</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">,</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>    <span class="p">)</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>    <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Auth provider&quot;</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authentication provider used in the registration of this user.&quot;</span><span class="p">,</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;Auth0&quot;</span><span class="p">,</span>
-</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>    <span class="p">)</span>
-</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email. Must be not used by another existent user.&quot;</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>    <span class="p">)</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>    <span class="n">cell_phone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mobile Number&quot;</span><span class="p">,</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mobile phone number in full international format.&quot;</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;+5527999884321&quot;</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>    <span class="p">)</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>
-</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User full name.&quot;</span><span class="p">,</span>
-</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>    <span class="p">)</span>
-</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>    <span class="n">avatar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Avatar&quot;</span><span class="p">,</span>
-</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User avatar picture URL.&quot;</span><span class="p">,</span>
-</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>    <span class="p">)</span>
-</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>    <span class="n">is_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="kc">False</span><span class="p">,</span>
-</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Verified&quot;</span><span class="p">,</span>
-</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email verified.&quot;</span><span class="p">,</span>
-</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>    <span class="p">)</span>
-</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="kc">True</span><span class="p">,</span>
-</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User active.&quot;</span><span class="p">,</span>
-</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>    <span class="p">)</span>
-</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>    <span class="n">is_superuser</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="kc">False</span><span class="p">,</span>
-</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Superuser&quot;</span><span class="p">,</span>
-</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User is super admin.&quot;</span><span class="p">,</span>
-</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="p">)</span>
-</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>
-</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="p">)</span>
-</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>    <span class="c1"># class Config:</span>
-</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="c1">#     &quot;&quot;&quot;Config sub-class needed to extend/override the generated JSON schema.</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">  1</span></a><span class="sd">&quot;&quot;&quot;User schema.&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">  2</span></a><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">  3</span></a>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">  4</span></a><span class="c1"># from operator import le</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">  5</span></a><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span><span class="p">,</span> <span class="n">EmailStr</span><span class="p">,</span> <span class="n">Field</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">  6</span></a>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">  7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">  8</span></a><span class="c1"># Schemas</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">  9</span></a><span class="k">class</span> <span class="nc">UserBaseSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos"> 10</span></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos"> 11</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos"> 12</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;User Login&quot;</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos"> 13</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Username used in login.&quot;</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos"> 14</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">],</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos"> 15</span></a>    <span class="p">)</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos"> 16</span></a>    <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos"> 17</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos"> 18</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Auth provider&quot;</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos"> 19</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authentication provider used in the registration of this user.&quot;</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos"> 20</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Auth0&quot;</span><span class="p">],</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos"> 21</span></a>    <span class="p">)</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos"> 22</span></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos"> 23</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos"> 24</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos"> 25</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email. Must be not used by another existent user.&quot;</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos"> 26</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">],</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos"> 27</span></a>    <span class="p">)</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos"> 28</span></a>    <span class="n">cell_phone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos"> 29</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos"> 30</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mobile Number&quot;</span><span class="p">,</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos"> 31</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mobile phone number in full international format.&quot;</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos"> 32</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;+5527999884321&quot;</span><span class="p">],</span>
+</span><span id="L-33"><a href="#L-33"><span class="linenos"> 33</span></a>    <span class="p">)</span>
+</span><span id="L-34"><a href="#L-34"><span class="linenos"> 34</span></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-35"><a href="#L-35"><span class="linenos"> 35</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-36"><a href="#L-36"><span class="linenos"> 36</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+</span><span id="L-37"><a href="#L-37"><span class="linenos"> 37</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User full name.&quot;</span><span class="p">,</span>
+</span><span id="L-38"><a href="#L-38"><span class="linenos"> 38</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;John Doe&quot;</span><span class="p">],</span>
+</span><span id="L-39"><a href="#L-39"><span class="linenos"> 39</span></a>    <span class="p">)</span>
+</span><span id="L-40"><a href="#L-40"><span class="linenos"> 40</span></a>    <span class="n">avatar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-41"><a href="#L-41"><span class="linenos"> 41</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-42"><a href="#L-42"><span class="linenos"> 42</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Avatar&quot;</span><span class="p">,</span>
+</span><span id="L-43"><a href="#L-43"><span class="linenos"> 43</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User avatar picture URL.&quot;</span><span class="p">,</span>
+</span><span id="L-44"><a href="#L-44"><span class="linenos"> 44</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;John Doe&quot;</span><span class="p">],</span>
+</span><span id="L-45"><a href="#L-45"><span class="linenos"> 45</span></a>    <span class="p">)</span>
+</span><span id="L-46"><a href="#L-46"><span class="linenos"> 46</span></a>    <span class="n">is_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-47"><a href="#L-47"><span class="linenos"> 47</span></a>        <span class="kc">False</span><span class="p">,</span>
+</span><span id="L-48"><a href="#L-48"><span class="linenos"> 48</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Verified&quot;</span><span class="p">,</span>
+</span><span id="L-49"><a href="#L-49"><span class="linenos"> 49</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email verified.&quot;</span><span class="p">,</span>
+</span><span id="L-50"><a href="#L-50"><span class="linenos"> 50</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+</span><span id="L-51"><a href="#L-51"><span class="linenos"> 51</span></a>    <span class="p">)</span>
+</span><span id="L-52"><a href="#L-52"><span class="linenos"> 52</span></a>    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-53"><a href="#L-53"><span class="linenos"> 53</span></a>        <span class="kc">True</span><span class="p">,</span>
+</span><span id="L-54"><a href="#L-54"><span class="linenos"> 54</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">,</span>
+</span><span id="L-55"><a href="#L-55"><span class="linenos"> 55</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User active.&quot;</span><span class="p">,</span>
+</span><span id="L-56"><a href="#L-56"><span class="linenos"> 56</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+</span><span id="L-57"><a href="#L-57"><span class="linenos"> 57</span></a>    <span class="p">)</span>
+</span><span id="L-58"><a href="#L-58"><span class="linenos"> 58</span></a>    <span class="n">is_superuser</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-59"><a href="#L-59"><span class="linenos"> 59</span></a>        <span class="kc">False</span><span class="p">,</span>
+</span><span id="L-60"><a href="#L-60"><span class="linenos"> 60</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Superuser&quot;</span><span class="p">,</span>
+</span><span id="L-61"><a href="#L-61"><span class="linenos"> 61</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User is super admin.&quot;</span><span class="p">,</span>
+</span><span id="L-62"><a href="#L-62"><span class="linenos"> 62</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+</span><span id="L-63"><a href="#L-63"><span class="linenos"> 63</span></a>    <span class="p">)</span>
+</span><span id="L-64"><a href="#L-64"><span class="linenos"> 64</span></a>
+</span><span id="L-65"><a href="#L-65"><span class="linenos"> 65</span></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span>
+</span><span id="L-66"><a href="#L-66"><span class="linenos"> 66</span></a>        <span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="L-67"><a href="#L-67"><span class="linenos"> 67</span></a>        <span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="L-68"><a href="#L-68"><span class="linenos"> 68</span></a>        <span class="c1"># allow_population_by_alias=True,</span>
+</span><span id="L-69"><a href="#L-69"><span class="linenos"> 69</span></a>    <span class="p">)</span>
 </span><span id="L-70"><a href="#L-70"><span class="linenos"> 70</span></a>
-</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>    <span class="c1">#     More details can be found in pydantic documentation:</span>
-</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a>    <span class="c1">#     https://pydantic-docs.helpmanual.io/usage/schema/#schema-customization</span>
-</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>
-</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>    <span class="c1">#     &quot;&quot;&quot;</span>
-</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>
-</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>    <span class="c1">#     orm_mode = True</span>
-</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>    <span class="c1">#     validate_assignment = True</span>
-</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>    <span class="c1">#     allow_population_by_alias = True</span>
-</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>
-</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>    <span class="c1">#     @staticmethod</span>
-</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>    <span class="c1">#     def schema_extra(schema: Dict[str, Any]) -&gt; None:</span>
-</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>    <span class="c1">#         &quot;&quot;&quot;Post-process the generated schema.</span>
-</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>
-</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="c1">#         Mathod can have one or two positional arguments. The first will be</span>
-</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="c1">#         the schema dictionary. The second, if accepted, will be the model</span>
-</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>    <span class="c1">#         class. The callable is expected to mutate the schema dictionary</span>
-</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>    <span class="c1">#         in-place; the return value is not used.</span>
-</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>
-</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>    <span class="c1">#         Args:</span>
-</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="c1">#             schema(Dict[str, Any]): The schema dictionary.</span>
-</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>
-</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>    <span class="c1">#         &quot;&quot;&quot;</span>
-</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>    <span class="c1">#         # Override schema description, by default is taken from docstring.</span>
-</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>    <span class="c1">#         schema[&quot;description&quot;] = &quot;User base schema.&quot;</span>
-</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>
-</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>
-</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a><span class="k">class</span> <span class="nc">UserInDBBaseSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span>
-</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unique ID.&quot;</span><span class="p">,</span>
-</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;ckasokq6g0000yvxuigfa2agy&quot;</span><span class="p">,</span>
-</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>    <span class="p">)</span>
-</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>    <span class="n">hashed_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hashed Password&quot;</span><span class="p">,</span>
-</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hashed password.&quot;</span><span class="p">,</span>
-</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&quot;</span><span class="p">,</span>
-</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a>    <span class="p">)</span>
-</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Create At&quot;</span><span class="p">,</span>
-</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was created.&quot;</span><span class="p">,</span>
-</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;2021-03-02T13:28:54.589000&quot;</span><span class="p">,</span>
-</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="p">)</span>
-</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>    <span class="n">updated_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Updated At&quot;</span><span class="p">,</span>
-</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was last updated.&quot;</span><span class="p">,</span>
-</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;2022-08-02T09:48:54.000000&quot;</span><span class="p">,</span>
-</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>    <span class="p">)</span>
-</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>
-</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>    <span class="c1"># class Config:</span>
-</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>    <span class="c1">#     &quot;&quot;&quot;Config sub-class needed to extend/override the generated JSON schema.</span>
-</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>
-</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>    <span class="c1">#     More details can be found in pydantic documentation:</span>
-</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>    <span class="c1">#     https://pydantic-docs.helpmanual.io/usage/schema/#schema-customization</span>
-</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>
-</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>    <span class="c1">#     &quot;&quot;&quot;</span>
-</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>
-</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a>    <span class="c1">#     @staticmethod</span>
-</span><span id="L-132"><a href="#L-132"><span class="linenos">132</span></a>    <span class="c1">#     def schema_extra(schema: Dict[str, Any]) -&gt; None:</span>
-</span><span id="L-133"><a href="#L-133"><span class="linenos">133</span></a>    <span class="c1">#         &quot;&quot;&quot;Post-process the generated schema.</span>
-</span><span id="L-134"><a href="#L-134"><span class="linenos">134</span></a>
-</span><span id="L-135"><a href="#L-135"><span class="linenos">135</span></a>    <span class="c1">#         Mathod can have one or two positional arguments. The first will be</span>
-</span><span id="L-136"><a href="#L-136"><span class="linenos">136</span></a>    <span class="c1">#         the schema dictionary. The second, if accepted, will be the model</span>
-</span><span id="L-137"><a href="#L-137"><span class="linenos">137</span></a>    <span class="c1">#         class. The callable is expected to mutate the schema dictionary</span>
-</span><span id="L-138"><a href="#L-138"><span class="linenos">138</span></a>    <span class="c1">#         in-place; the return value is not used.</span>
-</span><span id="L-139"><a href="#L-139"><span class="linenos">139</span></a>
-</span><span id="L-140"><a href="#L-140"><span class="linenos">140</span></a>    <span class="c1">#         Args:</span>
-</span><span id="L-141"><a href="#L-141"><span class="linenos">141</span></a>    <span class="c1">#             schema(Dict[str, Any]): The schema dictionary.</span>
-</span><span id="L-142"><a href="#L-142"><span class="linenos">142</span></a>
-</span><span id="L-143"><a href="#L-143"><span class="linenos">143</span></a>    <span class="c1">#         &quot;&quot;&quot;</span>
-</span><span id="L-144"><a href="#L-144"><span class="linenos">144</span></a>    <span class="c1">#         # Override schema description, by default is taken from docstring.</span>
-</span><span id="L-145"><a href="#L-145"><span class="linenos">145</span></a>    <span class="c1">#         schema[&quot;description&quot;] = &quot;Aumo WorkspaceInDBBaseSchema base model.&quot;</span>
-</span><span id="L-146"><a href="#L-146"><span class="linenos">146</span></a>
-</span><span id="L-147"><a href="#L-147"><span class="linenos">147</span></a>
-</span><span id="L-148"><a href="#L-148"><span class="linenos">148</span></a><span class="c1"># Properties to receive on item creation</span>
-</span><span id="L-149"><a href="#L-149"><span class="linenos">149</span></a><span class="k">class</span> <span class="nc">UserCreateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="L-150"><a href="#L-150"><span class="linenos">150</span></a>    <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="L-151"><a href="#L-151"><span class="linenos">151</span></a>        <span class="kc">None</span><span class="p">,</span>
-</span><span id="L-152"><a href="#L-152"><span class="linenos">152</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
-</span><span id="L-153"><a href="#L-153"><span class="linenos">153</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial plain password.&quot;</span><span class="p">,</span>
-</span><span id="L-154"><a href="#L-154"><span class="linenos">154</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clic9r1n9000gzqk480ghulbd&quot;</span><span class="p">],</span>
-</span><span id="L-155"><a href="#L-155"><span class="linenos">155</span></a>    <span class="p">)</span>
-</span><span id="L-156"><a href="#L-156"><span class="linenos">156</span></a>
-</span><span id="L-157"><a href="#L-157"><span class="linenos">157</span></a>
-</span><span id="L-158"><a href="#L-158"><span class="linenos">158</span></a><span class="c1"># Properties to receive on item update</span>
-</span><span id="L-159"><a href="#L-159"><span class="linenos">159</span></a><span class="k">class</span> <span class="nc">UserUpdateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="L-160"><a href="#L-160"><span class="linenos">160</span></a>    <span class="k">pass</span>
-</span><span id="L-161"><a href="#L-161"><span class="linenos">161</span></a>
-</span><span id="L-162"><a href="#L-162"><span class="linenos">162</span></a>
-</span><span id="L-163"><a href="#L-163"><span class="linenos">163</span></a><span class="n">USER_EXAMPLES_PAYLOAD</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="L-164"><a href="#L-164"><span class="linenos">164</span></a>    <span class="s2">&quot;UserDefault&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="L-165"><a href="#L-165"><span class="linenos">165</span></a>        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;User create example&quot;</span><span class="p">,</span>
-</span><span id="L-166"><a href="#L-166"><span class="linenos">166</span></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Example for user creation&quot;</span><span class="p">,</span>
-</span><span id="L-167"><a href="#L-167"><span class="linenos">167</span></a>        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="L-168"><a href="#L-168"><span class="linenos">168</span></a>            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;johndoe&quot;</span><span class="p">,</span>
-</span><span id="L-169"><a href="#L-169"><span class="linenos">169</span></a>            <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-</span><span id="L-170"><a href="#L-170"><span class="linenos">170</span></a>            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-</span><span id="L-171"><a href="#L-171"><span class="linenos">171</span></a>            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;john.doe@domain.com&quot;</span><span class="p">,</span>
-</span><span id="L-172"><a href="#L-172"><span class="linenos">172</span></a>            <span class="s2">&quot;cell_phone&quot;</span><span class="p">:</span> <span class="s2">&quot;55279998812345&quot;</span><span class="p">,</span>
-</span><span id="L-173"><a href="#L-173"><span class="linenos">173</span></a>            <span class="s2">&quot;avatar&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span id="L-174"><a href="#L-174"><span class="linenos">174</span></a>            <span class="s2">&quot;is_verified&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="L-175"><a href="#L-175"><span class="linenos">175</span></a>            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-</span><span id="L-176"><a href="#L-176"><span class="linenos">176</span></a>            <span class="s2">&quot;is_superuser&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="L-177"><a href="#L-177"><span class="linenos">177</span></a>            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;SomeGoodPassword&quot;</span>
-</span><span id="L-178"><a href="#L-178"><span class="linenos">178</span></a>        <span class="p">},</span>
-</span><span id="L-179"><a href="#L-179"><span class="linenos">179</span></a>    <span class="p">},</span>
-</span><span id="L-180"><a href="#L-180"><span class="linenos">180</span></a><span class="p">}</span>
+</span><span id="L-71"><a href="#L-71"><span class="linenos"> 71</span></a>
+</span><span id="L-72"><a href="#L-72"><span class="linenos"> 72</span></a><span class="k">class</span> <span class="nc">UserInDBBaseSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="L-73"><a href="#L-73"><span class="linenos"> 73</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-74"><a href="#L-74"><span class="linenos"> 74</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-75"><a href="#L-75"><span class="linenos"> 75</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span>
+</span><span id="L-76"><a href="#L-76"><span class="linenos"> 76</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unique ID.&quot;</span><span class="p">,</span>
+</span><span id="L-77"><a href="#L-77"><span class="linenos"> 77</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ckasokq6g0000yvxuigfa2agy&quot;</span><span class="p">],</span>
+</span><span id="L-78"><a href="#L-78"><span class="linenos"> 78</span></a>    <span class="p">)</span>
+</span><span id="L-79"><a href="#L-79"><span class="linenos"> 79</span></a>    <span class="n">hashed_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-80"><a href="#L-80"><span class="linenos"> 80</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-81"><a href="#L-81"><span class="linenos"> 81</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hashed Password&quot;</span><span class="p">,</span>
+</span><span id="L-82"><a href="#L-82"><span class="linenos"> 82</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hashed password.&quot;</span><span class="p">,</span>
+</span><span id="L-83"><a href="#L-83"><span class="linenos"> 83</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&quot;</span><span class="p">],</span>
+</span><span id="L-84"><a href="#L-84"><span class="linenos"> 84</span></a>    <span class="p">)</span>
+</span><span id="L-85"><a href="#L-85"><span class="linenos"> 85</span></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-86"><a href="#L-86"><span class="linenos"> 86</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-87"><a href="#L-87"><span class="linenos"> 87</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Create At&quot;</span><span class="p">,</span>
+</span><span id="L-88"><a href="#L-88"><span class="linenos"> 88</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was created.&quot;</span><span class="p">,</span>
+</span><span id="L-89"><a href="#L-89"><span class="linenos"> 89</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2021-03-02T13:28:54.589000&quot;</span><span class="p">],</span>
+</span><span id="L-90"><a href="#L-90"><span class="linenos"> 90</span></a>    <span class="p">)</span>
+</span><span id="L-91"><a href="#L-91"><span class="linenos"> 91</span></a>    <span class="n">updated_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-92"><a href="#L-92"><span class="linenos"> 92</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="L-93"><a href="#L-93"><span class="linenos"> 93</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Updated At&quot;</span><span class="p">,</span>
+</span><span id="L-94"><a href="#L-94"><span class="linenos"> 94</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was last updated.&quot;</span><span class="p">,</span>
+</span><span id="L-95"><a href="#L-95"><span class="linenos"> 95</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2022-08-02T09:48:54.000000&quot;</span><span class="p">],</span>
+</span><span id="L-96"><a href="#L-96"><span class="linenos"> 96</span></a>    <span class="p">)</span>
+</span><span id="L-97"><a href="#L-97"><span class="linenos"> 97</span></a>
+</span><span id="L-98"><a href="#L-98"><span class="linenos"> 98</span></a>
+</span><span id="L-99"><a href="#L-99"><span class="linenos"> 99</span></a><span class="c1"># Properties to receive on item creation</span>
+</span><span id="L-100"><a href="#L-100"><span class="linenos">100</span></a><span class="k">class</span> <span class="nc">UserCreateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="L-101"><a href="#L-101"><span class="linenos">101</span></a>    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="L-102"><a href="#L-102"><span class="linenos">102</span></a>        <span class="kc">None</span><span class="p">,</span>
+</span><span id="L-103"><a href="#L-103"><span class="linenos">103</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+</span><span id="L-104"><a href="#L-104"><span class="linenos">104</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial plain password.&quot;</span><span class="p">,</span>
+</span><span id="L-105"><a href="#L-105"><span class="linenos">105</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clic9r1n9000gzqk480ghulbd&quot;</span><span class="p">],</span>
+</span><span id="L-106"><a href="#L-106"><span class="linenos">106</span></a>    <span class="p">)</span>
+</span><span id="L-107"><a href="#L-107"><span class="linenos">107</span></a>
+</span><span id="L-108"><a href="#L-108"><span class="linenos">108</span></a>
+</span><span id="L-109"><a href="#L-109"><span class="linenos">109</span></a><span class="c1"># Properties to receive on item update</span>
+</span><span id="L-110"><a href="#L-110"><span class="linenos">110</span></a><span class="k">class</span> <span class="nc">UserUpdateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="L-111"><a href="#L-111"><span class="linenos">111</span></a>    <span class="k">pass</span>
+</span><span id="L-112"><a href="#L-112"><span class="linenos">112</span></a>
+</span><span id="L-113"><a href="#L-113"><span class="linenos">113</span></a>
+</span><span id="L-114"><a href="#L-114"><span class="linenos">114</span></a><span class="n">USER_EXAMPLES_PAYLOAD</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="L-115"><a href="#L-115"><span class="linenos">115</span></a>    <span class="s2">&quot;UserDefault&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="L-116"><a href="#L-116"><span class="linenos">116</span></a>        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;User create example&quot;</span><span class="p">,</span>
+</span><span id="L-117"><a href="#L-117"><span class="linenos">117</span></a>        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Example for user creation&quot;</span><span class="p">,</span>
+</span><span id="L-118"><a href="#L-118"><span class="linenos">118</span></a>        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="L-119"><a href="#L-119"><span class="linenos">119</span></a>            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;johndoe&quot;</span><span class="p">,</span>
+</span><span id="L-120"><a href="#L-120"><span class="linenos">120</span></a>            <span class="s2">&quot;full_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+</span><span id="L-121"><a href="#L-121"><span class="linenos">121</span></a>            <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
+</span><span id="L-122"><a href="#L-122"><span class="linenos">122</span></a>            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;john.doe@domain.com&quot;</span><span class="p">,</span>
+</span><span id="L-123"><a href="#L-123"><span class="linenos">123</span></a>            <span class="s2">&quot;cell_phone&quot;</span><span class="p">:</span> <span class="s2">&quot;55279998812345&quot;</span><span class="p">,</span>
+</span><span id="L-124"><a href="#L-124"><span class="linenos">124</span></a>            <span class="s2">&quot;avatar&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="L-125"><a href="#L-125"><span class="linenos">125</span></a>            <span class="s2">&quot;is_verified&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="L-126"><a href="#L-126"><span class="linenos">126</span></a>            <span class="s2">&quot;is_active&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+</span><span id="L-127"><a href="#L-127"><span class="linenos">127</span></a>            <span class="s2">&quot;is_superuser&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="L-128"><a href="#L-128"><span class="linenos">128</span></a>            <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;SomeGoodPassword&quot;</span><span class="p">,</span>
+</span><span id="L-129"><a href="#L-129"><span class="linenos">129</span></a>        <span class="p">},</span>
+</span><span id="L-130"><a href="#L-130"><span class="linenos">130</span></a>    <span class="p">},</span>
+</span><span id="L-131"><a href="#L-131"><span class="linenos">131</span></a><span class="p">}</span>
 </span></pre></div>
 
 
@@ -341,90 +292,67 @@
 
     </div>
     <a class="headerlink" href="#UserBaseSchema"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="UserBaseSchema-12"><a href="#UserBaseSchema-12"><span class="linenos">12</span></a><span class="k">class</span> <span class="nc">UserBaseSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-</span><span id="UserBaseSchema-13"><a href="#UserBaseSchema-13"><span class="linenos">13</span></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-14"><a href="#UserBaseSchema-14"><span class="linenos">14</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-15"><a href="#UserBaseSchema-15"><span class="linenos">15</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;User Login&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-16"><a href="#UserBaseSchema-16"><span class="linenos">16</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Username used in login.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-17"><a href="#UserBaseSchema-17"><span class="linenos">17</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-18"><a href="#UserBaseSchema-18"><span class="linenos">18</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-19"><a href="#UserBaseSchema-19"><span class="linenos">19</span></a>    <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-20"><a href="#UserBaseSchema-20"><span class="linenos">20</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-21"><a href="#UserBaseSchema-21"><span class="linenos">21</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Auth provider&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-22"><a href="#UserBaseSchema-22"><span class="linenos">22</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authentication provider used in the registration of this user.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-23"><a href="#UserBaseSchema-23"><span class="linenos">23</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;Auth0&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-24"><a href="#UserBaseSchema-24"><span class="linenos">24</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-25"><a href="#UserBaseSchema-25"><span class="linenos">25</span></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-26"><a href="#UserBaseSchema-26"><span class="linenos">26</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-27"><a href="#UserBaseSchema-27"><span class="linenos">27</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-28"><a href="#UserBaseSchema-28"><span class="linenos">28</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email. Must be not used by another existent user.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-29"><a href="#UserBaseSchema-29"><span class="linenos">29</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-30"><a href="#UserBaseSchema-30"><span class="linenos">30</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-31"><a href="#UserBaseSchema-31"><span class="linenos">31</span></a>    <span class="n">cell_phone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-32"><a href="#UserBaseSchema-32"><span class="linenos">32</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-33"><a href="#UserBaseSchema-33"><span class="linenos">33</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mobile Number&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-34"><a href="#UserBaseSchema-34"><span class="linenos">34</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mobile phone number in full international format.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-35"><a href="#UserBaseSchema-35"><span class="linenos">35</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;+5527999884321&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-36"><a href="#UserBaseSchema-36"><span class="linenos">36</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-37"><a href="#UserBaseSchema-37"><span class="linenos">37</span></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-38"><a href="#UserBaseSchema-38"><span class="linenos">38</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-39"><a href="#UserBaseSchema-39"><span class="linenos">39</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-40"><a href="#UserBaseSchema-40"><span class="linenos">40</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User full name.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-41"><a href="#UserBaseSchema-41"><span class="linenos">41</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-42"><a href="#UserBaseSchema-42"><span class="linenos">42</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-43"><a href="#UserBaseSchema-43"><span class="linenos">43</span></a>    <span class="n">avatar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-44"><a href="#UserBaseSchema-44"><span class="linenos">44</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserBaseSchema-45"><a href="#UserBaseSchema-45"><span class="linenos">45</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Avatar&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-46"><a href="#UserBaseSchema-46"><span class="linenos">46</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User avatar picture URL.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-47"><a href="#UserBaseSchema-47"><span class="linenos">47</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-48"><a href="#UserBaseSchema-48"><span class="linenos">48</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-49"><a href="#UserBaseSchema-49"><span class="linenos">49</span></a>    <span class="n">is_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-50"><a href="#UserBaseSchema-50"><span class="linenos">50</span></a>        <span class="kc">False</span><span class="p">,</span>
-</span><span id="UserBaseSchema-51"><a href="#UserBaseSchema-51"><span class="linenos">51</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Verified&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-52"><a href="#UserBaseSchema-52"><span class="linenos">52</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email verified.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-53"><a href="#UserBaseSchema-53"><span class="linenos">53</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="UserBaseSchema-54"><a href="#UserBaseSchema-54"><span class="linenos">54</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-55"><a href="#UserBaseSchema-55"><span class="linenos">55</span></a>    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-56"><a href="#UserBaseSchema-56"><span class="linenos">56</span></a>        <span class="kc">True</span><span class="p">,</span>
-</span><span id="UserBaseSchema-57"><a href="#UserBaseSchema-57"><span class="linenos">57</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-58"><a href="#UserBaseSchema-58"><span class="linenos">58</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User active.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-59"><a href="#UserBaseSchema-59"><span class="linenos">59</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="UserBaseSchema-60"><a href="#UserBaseSchema-60"><span class="linenos">60</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-61"><a href="#UserBaseSchema-61"><span class="linenos">61</span></a>    <span class="n">is_superuser</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserBaseSchema-62"><a href="#UserBaseSchema-62"><span class="linenos">62</span></a>        <span class="kc">False</span><span class="p">,</span>
-</span><span id="UserBaseSchema-63"><a href="#UserBaseSchema-63"><span class="linenos">63</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Superuser&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-64"><a href="#UserBaseSchema-64"><span class="linenos">64</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User is super admin.&quot;</span><span class="p">,</span>
-</span><span id="UserBaseSchema-65"><a href="#UserBaseSchema-65"><span class="linenos">65</span></a>        <span class="n">examples</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="UserBaseSchema-66"><a href="#UserBaseSchema-66"><span class="linenos">66</span></a>    <span class="p">)</span>
-</span><span id="UserBaseSchema-67"><a href="#UserBaseSchema-67"><span class="linenos">67</span></a>
-</span><span id="UserBaseSchema-68"><a href="#UserBaseSchema-68"><span class="linenos">68</span></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="p">)</span>
-</span><span id="UserBaseSchema-69"><a href="#UserBaseSchema-69"><span class="linenos">69</span></a>    <span class="c1"># class Config:</span>
-</span><span id="UserBaseSchema-70"><a href="#UserBaseSchema-70"><span class="linenos">70</span></a>    <span class="c1">#     &quot;&quot;&quot;Config sub-class needed to extend/override the generated JSON schema.</span>
-</span><span id="UserBaseSchema-71"><a href="#UserBaseSchema-71"><span class="linenos">71</span></a>
-</span><span id="UserBaseSchema-72"><a href="#UserBaseSchema-72"><span class="linenos">72</span></a>    <span class="c1">#     More details can be found in pydantic documentation:</span>
-</span><span id="UserBaseSchema-73"><a href="#UserBaseSchema-73"><span class="linenos">73</span></a>    <span class="c1">#     https://pydantic-docs.helpmanual.io/usage/schema/#schema-customization</span>
-</span><span id="UserBaseSchema-74"><a href="#UserBaseSchema-74"><span class="linenos">74</span></a>
-</span><span id="UserBaseSchema-75"><a href="#UserBaseSchema-75"><span class="linenos">75</span></a>    <span class="c1">#     &quot;&quot;&quot;</span>
-</span><span id="UserBaseSchema-76"><a href="#UserBaseSchema-76"><span class="linenos">76</span></a>
-</span><span id="UserBaseSchema-77"><a href="#UserBaseSchema-77"><span class="linenos">77</span></a>    <span class="c1">#     orm_mode = True</span>
-</span><span id="UserBaseSchema-78"><a href="#UserBaseSchema-78"><span class="linenos">78</span></a>    <span class="c1">#     validate_assignment = True</span>
-</span><span id="UserBaseSchema-79"><a href="#UserBaseSchema-79"><span class="linenos">79</span></a>    <span class="c1">#     allow_population_by_alias = True</span>
-</span><span id="UserBaseSchema-80"><a href="#UserBaseSchema-80"><span class="linenos">80</span></a>
-</span><span id="UserBaseSchema-81"><a href="#UserBaseSchema-81"><span class="linenos">81</span></a>    <span class="c1">#     @staticmethod</span>
-</span><span id="UserBaseSchema-82"><a href="#UserBaseSchema-82"><span class="linenos">82</span></a>    <span class="c1">#     def schema_extra(schema: Dict[str, Any]) -&gt; None:</span>
-</span><span id="UserBaseSchema-83"><a href="#UserBaseSchema-83"><span class="linenos">83</span></a>    <span class="c1">#         &quot;&quot;&quot;Post-process the generated schema.</span>
-</span><span id="UserBaseSchema-84"><a href="#UserBaseSchema-84"><span class="linenos">84</span></a>
-</span><span id="UserBaseSchema-85"><a href="#UserBaseSchema-85"><span class="linenos">85</span></a>    <span class="c1">#         Mathod can have one or two positional arguments. The first will be</span>
-</span><span id="UserBaseSchema-86"><a href="#UserBaseSchema-86"><span class="linenos">86</span></a>    <span class="c1">#         the schema dictionary. The second, if accepted, will be the model</span>
-</span><span id="UserBaseSchema-87"><a href="#UserBaseSchema-87"><span class="linenos">87</span></a>    <span class="c1">#         class. The callable is expected to mutate the schema dictionary</span>
-</span><span id="UserBaseSchema-88"><a href="#UserBaseSchema-88"><span class="linenos">88</span></a>    <span class="c1">#         in-place; the return value is not used.</span>
-</span><span id="UserBaseSchema-89"><a href="#UserBaseSchema-89"><span class="linenos">89</span></a>
-</span><span id="UserBaseSchema-90"><a href="#UserBaseSchema-90"><span class="linenos">90</span></a>    <span class="c1">#         Args:</span>
-</span><span id="UserBaseSchema-91"><a href="#UserBaseSchema-91"><span class="linenos">91</span></a>    <span class="c1">#             schema(Dict[str, Any]): The schema dictionary.</span>
-</span><span id="UserBaseSchema-92"><a href="#UserBaseSchema-92"><span class="linenos">92</span></a>
-</span><span id="UserBaseSchema-93"><a href="#UserBaseSchema-93"><span class="linenos">93</span></a>    <span class="c1">#         &quot;&quot;&quot;</span>
-</span><span id="UserBaseSchema-94"><a href="#UserBaseSchema-94"><span class="linenos">94</span></a>    <span class="c1">#         # Override schema description, by default is taken from docstring.</span>
-</span><span id="UserBaseSchema-95"><a href="#UserBaseSchema-95"><span class="linenos">95</span></a>    <span class="c1">#         schema[&quot;description&quot;] = &quot;User base schema.&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UserBaseSchema-10"><a href="#UserBaseSchema-10"><span class="linenos">10</span></a><span class="k">class</span> <span class="nc">UserBaseSchema</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+</span><span id="UserBaseSchema-11"><a href="#UserBaseSchema-11"><span class="linenos">11</span></a>    <span class="n">username</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-12"><a href="#UserBaseSchema-12"><span class="linenos">12</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-13"><a href="#UserBaseSchema-13"><span class="linenos">13</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;User Login&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-14"><a href="#UserBaseSchema-14"><span class="linenos">14</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Username used in login.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-15"><a href="#UserBaseSchema-15"><span class="linenos">15</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-16"><a href="#UserBaseSchema-16"><span class="linenos">16</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-17"><a href="#UserBaseSchema-17"><span class="linenos">17</span></a>    <span class="n">provider</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-18"><a href="#UserBaseSchema-18"><span class="linenos">18</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-19"><a href="#UserBaseSchema-19"><span class="linenos">19</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Auth provider&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-20"><a href="#UserBaseSchema-20"><span class="linenos">20</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Authentication provider used in the registration of this user.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-21"><a href="#UserBaseSchema-21"><span class="linenos">21</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Auth0&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-22"><a href="#UserBaseSchema-22"><span class="linenos">22</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-23"><a href="#UserBaseSchema-23"><span class="linenos">23</span></a>    <span class="n">email</span><span class="p">:</span> <span class="n">EmailStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-24"><a href="#UserBaseSchema-24"><span class="linenos">24</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-25"><a href="#UserBaseSchema-25"><span class="linenos">25</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Email&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-26"><a href="#UserBaseSchema-26"><span class="linenos">26</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email. Must be not used by another existent user.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-27"><a href="#UserBaseSchema-27"><span class="linenos">27</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;user@domain.com&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-28"><a href="#UserBaseSchema-28"><span class="linenos">28</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-29"><a href="#UserBaseSchema-29"><span class="linenos">29</span></a>    <span class="n">cell_phone</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-30"><a href="#UserBaseSchema-30"><span class="linenos">30</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-31"><a href="#UserBaseSchema-31"><span class="linenos">31</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mobile Number&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-32"><a href="#UserBaseSchema-32"><span class="linenos">32</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mobile phone number in full international format.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-33"><a href="#UserBaseSchema-33"><span class="linenos">33</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;+5527999884321&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-34"><a href="#UserBaseSchema-34"><span class="linenos">34</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-35"><a href="#UserBaseSchema-35"><span class="linenos">35</span></a>    <span class="n">full_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-36"><a href="#UserBaseSchema-36"><span class="linenos">36</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-37"><a href="#UserBaseSchema-37"><span class="linenos">37</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-38"><a href="#UserBaseSchema-38"><span class="linenos">38</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User full name.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-39"><a href="#UserBaseSchema-39"><span class="linenos">39</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;John Doe&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-40"><a href="#UserBaseSchema-40"><span class="linenos">40</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-41"><a href="#UserBaseSchema-41"><span class="linenos">41</span></a>    <span class="n">avatar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-42"><a href="#UserBaseSchema-42"><span class="linenos">42</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserBaseSchema-43"><a href="#UserBaseSchema-43"><span class="linenos">43</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Avatar&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-44"><a href="#UserBaseSchema-44"><span class="linenos">44</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User avatar picture URL.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-45"><a href="#UserBaseSchema-45"><span class="linenos">45</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;John Doe&quot;</span><span class="p">],</span>
+</span><span id="UserBaseSchema-46"><a href="#UserBaseSchema-46"><span class="linenos">46</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-47"><a href="#UserBaseSchema-47"><span class="linenos">47</span></a>    <span class="n">is_verified</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-48"><a href="#UserBaseSchema-48"><span class="linenos">48</span></a>        <span class="kc">False</span><span class="p">,</span>
+</span><span id="UserBaseSchema-49"><a href="#UserBaseSchema-49"><span class="linenos">49</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Verified&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-50"><a href="#UserBaseSchema-50"><span class="linenos">50</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User email verified.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-51"><a href="#UserBaseSchema-51"><span class="linenos">51</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+</span><span id="UserBaseSchema-52"><a href="#UserBaseSchema-52"><span class="linenos">52</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-53"><a href="#UserBaseSchema-53"><span class="linenos">53</span></a>    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-54"><a href="#UserBaseSchema-54"><span class="linenos">54</span></a>        <span class="kc">True</span><span class="p">,</span>
+</span><span id="UserBaseSchema-55"><a href="#UserBaseSchema-55"><span class="linenos">55</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-56"><a href="#UserBaseSchema-56"><span class="linenos">56</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User active.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-57"><a href="#UserBaseSchema-57"><span class="linenos">57</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+</span><span id="UserBaseSchema-58"><a href="#UserBaseSchema-58"><span class="linenos">58</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-59"><a href="#UserBaseSchema-59"><span class="linenos">59</span></a>    <span class="n">is_superuser</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserBaseSchema-60"><a href="#UserBaseSchema-60"><span class="linenos">60</span></a>        <span class="kc">False</span><span class="p">,</span>
+</span><span id="UserBaseSchema-61"><a href="#UserBaseSchema-61"><span class="linenos">61</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Superuser&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-62"><a href="#UserBaseSchema-62"><span class="linenos">62</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;User is super admin.&quot;</span><span class="p">,</span>
+</span><span id="UserBaseSchema-63"><a href="#UserBaseSchema-63"><span class="linenos">63</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+</span><span id="UserBaseSchema-64"><a href="#UserBaseSchema-64"><span class="linenos">64</span></a>    <span class="p">)</span>
+</span><span id="UserBaseSchema-65"><a href="#UserBaseSchema-65"><span class="linenos">65</span></a>
+</span><span id="UserBaseSchema-66"><a href="#UserBaseSchema-66"><span class="linenos">66</span></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span>
+</span><span id="UserBaseSchema-67"><a href="#UserBaseSchema-67"><span class="linenos">67</span></a>        <span class="n">from_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="UserBaseSchema-68"><a href="#UserBaseSchema-68"><span class="linenos">68</span></a>        <span class="n">validate_assignment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="UserBaseSchema-69"><a href="#UserBaseSchema-69"><span class="linenos">69</span></a>        <span class="c1"># allow_population_by_alias=True,</span>
+</span><span id="UserBaseSchema-70"><a href="#UserBaseSchema-70"><span class="linenos">70</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -515,7 +443,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="UserBaseSchema.avatar" class="classattr">
                                 <div class="attr variable">
-            <span class="name">avatar</span><span class="annotation">: Optional[str]</span>
+            <span class="name">avatar</span><span class="annotation">: str | None</span>
 
         
     </div>
@@ -560,7 +488,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             <div id="UserBaseSchema.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
-<span class="default_value">{&#39;from_attributes&#39;: True}</span>
+<span class="default_value">{&#39;from_attributes&#39;: True, &#39;validate_assignment&#39;: True}</span>
 
         
     </div>
@@ -573,7 +501,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="UserBaseSchema.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="UserBaseSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=&#39;user@domain.com&#39;), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=&#39;Auth0&#39;), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=&#39;user@domain.com&#39;), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=&#39;+5527999884321&#39;), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=&#39;John Doe&#39;), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=&#39;John Doe&#39;), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=False), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=True), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=False)}</span>
+            <label class="view-value-button pdoc-button" for="UserBaseSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=[&#39;Auth0&#39;]), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=[&#39;+5527999884321&#39;]), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=[&#39;John Doe&#39;]), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=[&#39;John Doe&#39;]), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=[False]), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=[True]), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=[False])}</span>
 
         
     </div>
@@ -628,55 +556,31 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#UserInDBBaseSchema"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="UserInDBBaseSchema-98"><a href="#UserInDBBaseSchema-98"><span class="linenos"> 98</span></a><span class="k">class</span> <span class="nc">UserInDBBaseSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="UserInDBBaseSchema-99"><a href="#UserInDBBaseSchema-99"><span class="linenos"> 99</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserInDBBaseSchema-100"><a href="#UserInDBBaseSchema-100"><span class="linenos">100</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-101"><a href="#UserInDBBaseSchema-101"><span class="linenos">101</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-102"><a href="#UserInDBBaseSchema-102"><span class="linenos">102</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unique ID.&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-103"><a href="#UserInDBBaseSchema-103"><span class="linenos">103</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;ckasokq6g0000yvxuigfa2agy&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-104"><a href="#UserInDBBaseSchema-104"><span class="linenos">104</span></a>    <span class="p">)</span>
-</span><span id="UserInDBBaseSchema-105"><a href="#UserInDBBaseSchema-105"><span class="linenos">105</span></a>    <span class="n">hashed_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserInDBBaseSchema-106"><a href="#UserInDBBaseSchema-106"><span class="linenos">106</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-107"><a href="#UserInDBBaseSchema-107"><span class="linenos">107</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hashed Password&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-108"><a href="#UserInDBBaseSchema-108"><span class="linenos">108</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hashed password.&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-109"><a href="#UserInDBBaseSchema-109"><span class="linenos">109</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-110"><a href="#UserInDBBaseSchema-110"><span class="linenos">110</span></a>    <span class="p">)</span>
-</span><span id="UserInDBBaseSchema-111"><a href="#UserInDBBaseSchema-111"><span class="linenos">111</span></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserInDBBaseSchema-112"><a href="#UserInDBBaseSchema-112"><span class="linenos">112</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-113"><a href="#UserInDBBaseSchema-113"><span class="linenos">113</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Create At&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-114"><a href="#UserInDBBaseSchema-114"><span class="linenos">114</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was created.&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-115"><a href="#UserInDBBaseSchema-115"><span class="linenos">115</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;2021-03-02T13:28:54.589000&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-116"><a href="#UserInDBBaseSchema-116"><span class="linenos">116</span></a>    <span class="p">)</span>
-</span><span id="UserInDBBaseSchema-117"><a href="#UserInDBBaseSchema-117"><span class="linenos">117</span></a>    <span class="n">updated_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserInDBBaseSchema-118"><a href="#UserInDBBaseSchema-118"><span class="linenos">118</span></a>        <span class="o">...</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-119"><a href="#UserInDBBaseSchema-119"><span class="linenos">119</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Updated At&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-120"><a href="#UserInDBBaseSchema-120"><span class="linenos">120</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was last updated.&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-121"><a href="#UserInDBBaseSchema-121"><span class="linenos">121</span></a>        <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;2022-08-02T09:48:54.000000&quot;</span><span class="p">,</span>
-</span><span id="UserInDBBaseSchema-122"><a href="#UserInDBBaseSchema-122"><span class="linenos">122</span></a>    <span class="p">)</span>
-</span><span id="UserInDBBaseSchema-123"><a href="#UserInDBBaseSchema-123"><span class="linenos">123</span></a>
-</span><span id="UserInDBBaseSchema-124"><a href="#UserInDBBaseSchema-124"><span class="linenos">124</span></a>    <span class="c1"># class Config:</span>
-</span><span id="UserInDBBaseSchema-125"><a href="#UserInDBBaseSchema-125"><span class="linenos">125</span></a>    <span class="c1">#     &quot;&quot;&quot;Config sub-class needed to extend/override the generated JSON schema.</span>
-</span><span id="UserInDBBaseSchema-126"><a href="#UserInDBBaseSchema-126"><span class="linenos">126</span></a>
-</span><span id="UserInDBBaseSchema-127"><a href="#UserInDBBaseSchema-127"><span class="linenos">127</span></a>    <span class="c1">#     More details can be found in pydantic documentation:</span>
-</span><span id="UserInDBBaseSchema-128"><a href="#UserInDBBaseSchema-128"><span class="linenos">128</span></a>    <span class="c1">#     https://pydantic-docs.helpmanual.io/usage/schema/#schema-customization</span>
-</span><span id="UserInDBBaseSchema-129"><a href="#UserInDBBaseSchema-129"><span class="linenos">129</span></a>
-</span><span id="UserInDBBaseSchema-130"><a href="#UserInDBBaseSchema-130"><span class="linenos">130</span></a>    <span class="c1">#     &quot;&quot;&quot;</span>
-</span><span id="UserInDBBaseSchema-131"><a href="#UserInDBBaseSchema-131"><span class="linenos">131</span></a>
-</span><span id="UserInDBBaseSchema-132"><a href="#UserInDBBaseSchema-132"><span class="linenos">132</span></a>    <span class="c1">#     @staticmethod</span>
-</span><span id="UserInDBBaseSchema-133"><a href="#UserInDBBaseSchema-133"><span class="linenos">133</span></a>    <span class="c1">#     def schema_extra(schema: Dict[str, Any]) -&gt; None:</span>
-</span><span id="UserInDBBaseSchema-134"><a href="#UserInDBBaseSchema-134"><span class="linenos">134</span></a>    <span class="c1">#         &quot;&quot;&quot;Post-process the generated schema.</span>
-</span><span id="UserInDBBaseSchema-135"><a href="#UserInDBBaseSchema-135"><span class="linenos">135</span></a>
-</span><span id="UserInDBBaseSchema-136"><a href="#UserInDBBaseSchema-136"><span class="linenos">136</span></a>    <span class="c1">#         Mathod can have one or two positional arguments. The first will be</span>
-</span><span id="UserInDBBaseSchema-137"><a href="#UserInDBBaseSchema-137"><span class="linenos">137</span></a>    <span class="c1">#         the schema dictionary. The second, if accepted, will be the model</span>
-</span><span id="UserInDBBaseSchema-138"><a href="#UserInDBBaseSchema-138"><span class="linenos">138</span></a>    <span class="c1">#         class. The callable is expected to mutate the schema dictionary</span>
-</span><span id="UserInDBBaseSchema-139"><a href="#UserInDBBaseSchema-139"><span class="linenos">139</span></a>    <span class="c1">#         in-place; the return value is not used.</span>
-</span><span id="UserInDBBaseSchema-140"><a href="#UserInDBBaseSchema-140"><span class="linenos">140</span></a>
-</span><span id="UserInDBBaseSchema-141"><a href="#UserInDBBaseSchema-141"><span class="linenos">141</span></a>    <span class="c1">#         Args:</span>
-</span><span id="UserInDBBaseSchema-142"><a href="#UserInDBBaseSchema-142"><span class="linenos">142</span></a>    <span class="c1">#             schema(Dict[str, Any]): The schema dictionary.</span>
-</span><span id="UserInDBBaseSchema-143"><a href="#UserInDBBaseSchema-143"><span class="linenos">143</span></a>
-</span><span id="UserInDBBaseSchema-144"><a href="#UserInDBBaseSchema-144"><span class="linenos">144</span></a>    <span class="c1">#         &quot;&quot;&quot;</span>
-</span><span id="UserInDBBaseSchema-145"><a href="#UserInDBBaseSchema-145"><span class="linenos">145</span></a>    <span class="c1">#         # Override schema description, by default is taken from docstring.</span>
-</span><span id="UserInDBBaseSchema-146"><a href="#UserInDBBaseSchema-146"><span class="linenos">146</span></a>    <span class="c1">#         schema[&quot;description&quot;] = &quot;Aumo WorkspaceInDBBaseSchema base model.&quot;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UserInDBBaseSchema-73"><a href="#UserInDBBaseSchema-73"><span class="linenos">73</span></a><span class="k">class</span> <span class="nc">UserInDBBaseSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="UserInDBBaseSchema-74"><a href="#UserInDBBaseSchema-74"><span class="linenos">74</span></a>    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserInDBBaseSchema-75"><a href="#UserInDBBaseSchema-75"><span class="linenos">75</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-76"><a href="#UserInDBBaseSchema-76"><span class="linenos">76</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-77"><a href="#UserInDBBaseSchema-77"><span class="linenos">77</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Unique ID.&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-78"><a href="#UserInDBBaseSchema-78"><span class="linenos">78</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ckasokq6g0000yvxuigfa2agy&quot;</span><span class="p">],</span>
+</span><span id="UserInDBBaseSchema-79"><a href="#UserInDBBaseSchema-79"><span class="linenos">79</span></a>    <span class="p">)</span>
+</span><span id="UserInDBBaseSchema-80"><a href="#UserInDBBaseSchema-80"><span class="linenos">80</span></a>    <span class="n">hashed_password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserInDBBaseSchema-81"><a href="#UserInDBBaseSchema-81"><span class="linenos">81</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-82"><a href="#UserInDBBaseSchema-82"><span class="linenos">82</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Hashed Password&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-83"><a href="#UserInDBBaseSchema-83"><span class="linenos">83</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Hashed password.&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-84"><a href="#UserInDBBaseSchema-84"><span class="linenos">84</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&quot;</span><span class="p">],</span>
+</span><span id="UserInDBBaseSchema-85"><a href="#UserInDBBaseSchema-85"><span class="linenos">85</span></a>    <span class="p">)</span>
+</span><span id="UserInDBBaseSchema-86"><a href="#UserInDBBaseSchema-86"><span class="linenos">86</span></a>    <span class="n">created_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserInDBBaseSchema-87"><a href="#UserInDBBaseSchema-87"><span class="linenos">87</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-88"><a href="#UserInDBBaseSchema-88"><span class="linenos">88</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Create At&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-89"><a href="#UserInDBBaseSchema-89"><span class="linenos">89</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was created.&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-90"><a href="#UserInDBBaseSchema-90"><span class="linenos">90</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2021-03-02T13:28:54.589000&quot;</span><span class="p">],</span>
+</span><span id="UserInDBBaseSchema-91"><a href="#UserInDBBaseSchema-91"><span class="linenos">91</span></a>    <span class="p">)</span>
+</span><span id="UserInDBBaseSchema-92"><a href="#UserInDBBaseSchema-92"><span class="linenos">92</span></a>    <span class="n">updated_at</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserInDBBaseSchema-93"><a href="#UserInDBBaseSchema-93"><span class="linenos">93</span></a>        <span class="o">...</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-94"><a href="#UserInDBBaseSchema-94"><span class="linenos">94</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Updated At&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-95"><a href="#UserInDBBaseSchema-95"><span class="linenos">95</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Timestamp when this record was last updated.&quot;</span><span class="p">,</span>
+</span><span id="UserInDBBaseSchema-96"><a href="#UserInDBBaseSchema-96"><span class="linenos">96</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;2022-08-02T09:48:54.000000&quot;</span><span class="p">],</span>
+</span><span id="UserInDBBaseSchema-97"><a href="#UserInDBBaseSchema-97"><span class="linenos">97</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -734,7 +638,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="UserInDBBaseSchema.created_at" class="classattr">
                                 <div class="attr variable">
-            <span class="name">created_at</span><span class="annotation">: Optional[datetime.datetime]</span>
+            <span class="name">created_at</span><span class="annotation">: datetime.datetime | None</span>
 
         
     </div>
@@ -745,7 +649,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             </div>
                             <div id="UserInDBBaseSchema.updated_at" class="classattr">
                                 <div class="attr variable">
-            <span class="name">updated_at</span><span class="annotation">: Optional[datetime.datetime]</span>
+            <span class="name">updated_at</span><span class="annotation">: datetime.datetime | None</span>
 
         
     </div>
@@ -757,7 +661,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             <div id="UserInDBBaseSchema.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
-<span class="default_value">{&#39;from_attributes&#39;: True}</span>
+<span class="default_value">{&#39;from_attributes&#39;: True, &#39;validate_assignment&#39;: True}</span>
 
         
     </div>
@@ -770,7 +674,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="UserInDBBaseSchema.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="UserInDBBaseSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=&#39;user@domain.com&#39;), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=&#39;Auth0&#39;), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=&#39;user@domain.com&#39;), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=&#39;+5527999884321&#39;), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=&#39;John Doe&#39;), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=&#39;John Doe&#39;), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=False), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=True), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=False), &#39;id&#39;: FieldInfo(annotation=str, required=True, title=&#39;ID&#39;, description=&#39;Unique ID.&#39;, examples=&#39;ckasokq6g0000yvxuigfa2agy&#39;), &#39;hashed_password&#39;: FieldInfo(annotation=str, required=True, title=&#39;Hashed Password&#39;, description=&#39;Hashed password.&#39;, examples=&#39;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&#39;), &#39;created_at&#39;: FieldInfo(annotation=Union[datetime, NoneType], required=True, title=&#39;Create At&#39;, description=&#39;Timestamp when this record was created.&#39;, examples=&#39;2021-03-02T13:28:54.589000&#39;), &#39;updated_at&#39;: FieldInfo(annotation=Union[datetime, NoneType], required=True, title=&#39;Updated At&#39;, description=&#39;Timestamp when this record was last updated.&#39;, examples=&#39;2022-08-02T09:48:54.000000&#39;)}</span>
+            <label class="view-value-button pdoc-button" for="UserInDBBaseSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=[&#39;Auth0&#39;]), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=[&#39;+5527999884321&#39;]), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=[&#39;John Doe&#39;]), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=[&#39;John Doe&#39;]), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=[False]), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=[True]), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=[False]), &#39;id&#39;: FieldInfo(annotation=str, required=True, title=&#39;ID&#39;, description=&#39;Unique ID.&#39;, examples=[&#39;ckasokq6g0000yvxuigfa2agy&#39;]), &#39;hashed_password&#39;: FieldInfo(annotation=str, required=True, title=&#39;Hashed Password&#39;, description=&#39;Hashed password.&#39;, examples=[&#39;$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi&#39;]), &#39;created_at&#39;: FieldInfo(annotation=Union[datetime, NoneType], required=True, title=&#39;Create At&#39;, description=&#39;Timestamp when this record was created.&#39;, examples=[&#39;2021-03-02T13:28:54.589000&#39;]), &#39;updated_at&#39;: FieldInfo(annotation=Union[datetime, NoneType], required=True, title=&#39;Updated At&#39;, description=&#39;Timestamp when this record was last updated.&#39;, examples=[&#39;2022-08-02T09:48:54.000000&#39;])}</span>
 
         
     </div>
@@ -837,13 +741,13 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#UserCreateSchema"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="UserCreateSchema-150"><a href="#UserCreateSchema-150"><span class="linenos">150</span></a><span class="k">class</span> <span class="nc">UserCreateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="UserCreateSchema-151"><a href="#UserCreateSchema-151"><span class="linenos">151</span></a>    <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
-</span><span id="UserCreateSchema-152"><a href="#UserCreateSchema-152"><span class="linenos">152</span></a>        <span class="kc">None</span><span class="p">,</span>
-</span><span id="UserCreateSchema-153"><a href="#UserCreateSchema-153"><span class="linenos">153</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
-</span><span id="UserCreateSchema-154"><a href="#UserCreateSchema-154"><span class="linenos">154</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial plain password.&quot;</span><span class="p">,</span>
-</span><span id="UserCreateSchema-155"><a href="#UserCreateSchema-155"><span class="linenos">155</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clic9r1n9000gzqk480ghulbd&quot;</span><span class="p">],</span>
-</span><span id="UserCreateSchema-156"><a href="#UserCreateSchema-156"><span class="linenos">156</span></a>    <span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UserCreateSchema-101"><a href="#UserCreateSchema-101"><span class="linenos">101</span></a><span class="k">class</span> <span class="nc">UserCreateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="UserCreateSchema-102"><a href="#UserCreateSchema-102"><span class="linenos">102</span></a>    <span class="n">password</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span>
+</span><span id="UserCreateSchema-103"><a href="#UserCreateSchema-103"><span class="linenos">103</span></a>        <span class="kc">None</span><span class="p">,</span>
+</span><span id="UserCreateSchema-104"><a href="#UserCreateSchema-104"><span class="linenos">104</span></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span><span class="p">,</span>
+</span><span id="UserCreateSchema-105"><a href="#UserCreateSchema-105"><span class="linenos">105</span></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initial plain password.&quot;</span><span class="p">,</span>
+</span><span id="UserCreateSchema-106"><a href="#UserCreateSchema-106"><span class="linenos">106</span></a>        <span class="n">examples</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;clic9r1n9000gzqk480ghulbd&quot;</span><span class="p">],</span>
+</span><span id="UserCreateSchema-107"><a href="#UserCreateSchema-107"><span class="linenos">107</span></a>    <span class="p">)</span>
 </span></pre></div>
 
 
@@ -879,7 +783,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
                             <div id="UserCreateSchema.password" class="classattr">
                                 <div class="attr variable">
-            <span class="name">password</span><span class="annotation">: Optional[str]</span>
+            <span class="name">password</span><span class="annotation">: str | None</span>
 
         
     </div>
@@ -891,7 +795,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             <div id="UserCreateSchema.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
-<span class="default_value">{&#39;from_attributes&#39;: True}</span>
+<span class="default_value">{&#39;from_attributes&#39;: True, &#39;validate_assignment&#39;: True}</span>
 
         
     </div>
@@ -904,7 +808,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="UserCreateSchema.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="UserCreateSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=&#39;user@domain.com&#39;), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=&#39;Auth0&#39;), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=&#39;user@domain.com&#39;), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=&#39;+5527999884321&#39;), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=&#39;John Doe&#39;), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=&#39;John Doe&#39;), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=False), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=True), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=False), &#39;password&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, title=&#39;Password&#39;, description=&#39;Initial plain password.&#39;, examples=[&#39;clic9r1n9000gzqk480ghulbd&#39;])}</span>
+            <label class="view-value-button pdoc-button" for="UserCreateSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=[&#39;Auth0&#39;]), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=[&#39;+5527999884321&#39;]), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=[&#39;John Doe&#39;]), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=[&#39;John Doe&#39;]), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=[False]), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=[True]), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=[False]), &#39;password&#39;: FieldInfo(annotation=Union[str, NoneType], required=False, title=&#39;Password&#39;, description=&#39;Initial plain password.&#39;, examples=[&#39;clic9r1n9000gzqk480ghulbd&#39;])}</span>
 
         
     </div>
@@ -971,8 +875,8 @@ __pydantic_private__: Instance attribute with the values of private attributes s
 
     </div>
     <a class="headerlink" href="#UserUpdateSchema"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="UserUpdateSchema-160"><a href="#UserUpdateSchema-160"><span class="linenos">160</span></a><span class="k">class</span> <span class="nc">UserUpdateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
-</span><span id="UserUpdateSchema-161"><a href="#UserUpdateSchema-161"><span class="linenos">161</span></a>    <span class="k">pass</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="UserUpdateSchema-111"><a href="#UserUpdateSchema-111"><span class="linenos">111</span></a><span class="k">class</span> <span class="nc">UserUpdateSchema</span><span class="p">(</span><span class="n">UserBaseSchema</span><span class="p">):</span>
+</span><span id="UserUpdateSchema-112"><a href="#UserUpdateSchema-112"><span class="linenos">112</span></a>    <span class="k">pass</span>
 </span></pre></div>
 
 
@@ -1009,7 +913,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                             <div id="UserUpdateSchema.model_config" class="classattr">
                                 <div class="attr variable">
             <span class="name">model_config</span>        =
-<span class="default_value">{&#39;from_attributes&#39;: True}</span>
+<span class="default_value">{&#39;from_attributes&#39;: True, &#39;validate_assignment&#39;: True}</span>
 
         
     </div>
@@ -1022,7 +926,7 @@ __pydantic_private__: Instance attribute with the values of private attributes s
                                 <div class="attr variable">
             <span class="name">model_fields</span>        =
 <input id="UserUpdateSchema.model_fields-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-            <label class="view-value-button pdoc-button" for="UserUpdateSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=&#39;user@domain.com&#39;), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=&#39;Auth0&#39;), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=&#39;user@domain.com&#39;), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=&#39;+5527999884321&#39;), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=&#39;John Doe&#39;), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=&#39;John Doe&#39;), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=False), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=True), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=False)}</span>
+            <label class="view-value-button pdoc-button" for="UserUpdateSchema.model_fields-view-value"></label><span class="default_value">{&#39;username&#39;: FieldInfo(annotation=str, required=True, title=&#39;User Login&#39;, description=&#39;Username used in login.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;provider&#39;: FieldInfo(annotation=str, required=True, title=&#39;Auth provider&#39;, description=&#39;Authentication provider used in the registration of this user.&#39;, examples=[&#39;Auth0&#39;]), &#39;email&#39;: FieldInfo(annotation=EmailStr, required=True, title=&#39;Email&#39;, description=&#39;User email. Must be not used by another existent user.&#39;, examples=[&#39;user@domain.com&#39;]), &#39;cell_phone&#39;: FieldInfo(annotation=str, required=True, title=&#39;Mobile Number&#39;, description=&#39;Mobile phone number in full international format.&#39;, examples=[&#39;+5527999884321&#39;]), &#39;full_name&#39;: FieldInfo(annotation=str, required=True, title=&#39;Name&#39;, description=&#39;User full name.&#39;, examples=[&#39;John Doe&#39;]), &#39;avatar&#39;: FieldInfo(annotation=Union[str, NoneType], required=True, title=&#39;Avatar&#39;, description=&#39;User avatar picture URL.&#39;, examples=[&#39;John Doe&#39;]), &#39;is_verified&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Verified&#39;, description=&#39;User email verified.&#39;, examples=[False]), &#39;is_active&#39;: FieldInfo(annotation=bool, required=False, default=True, title=&#39;Active&#39;, description=&#39;User active.&#39;, examples=[True]), &#39;is_superuser&#39;: FieldInfo(annotation=bool, required=False, default=False, title=&#39;Superuser&#39;, description=&#39;User is super admin.&#39;, examples=[False])}</span>
 
         
     </div>
