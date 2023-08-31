@@ -31,8 +31,6 @@ class User(AbstractModel):
         a string representing the hashed password of the user
     is_verified : so.Mapped[bool]
         a boolean indicating whether the user is verified, default is False
-    is_premium : so.Mapped[bool]
-        a boolean indicating whether the user is a premium user, default is False
     is_active : so.Mapped[bool]
         a boolean indicating whether the user is active, default is True
     is_superuser : so.Mapped[bool]
@@ -50,16 +48,13 @@ class User(AbstractModel):
 
     __tablename__ = "users"
     username: so.Mapped[str] = so.mapped_column(nullable=False)
-    provider: so.Mapped[str] = so.mapped_column(default="local", nullable=True)
-    email: so.Mapped[str] = so.mapped_column(nullable=True)
-    cell_phone: so.Mapped[str] = so.mapped_column(nullable=True, index=True)
+    provider: so.Mapped[str] = so.mapped_column(default="local", nullable=False)
+    email: so.Mapped[str] = so.mapped_column(nullable=False)
+    cell_phone: so.Mapped[str] = so.mapped_column(nullable=False, index=True)
     full_name: so.Mapped[str] = so.mapped_column(nullable=False)
     avatar: so.Mapped[str] = so.mapped_column(nullable=True)
     hashed_password: so.Mapped[str] = so.mapped_column(nullable=True)
     is_verified: so.Mapped[bool] = so.mapped_column(
-        nullable=False, default=False, server_default=sa.text("false")
-    )
-    is_premium: so.Mapped[bool] = so.mapped_column(
         nullable=False, default=False, server_default=sa.text("false")
     )
     is_active: so.Mapped[bool] = so.mapped_column(default=True, server_default=sa.text("true"))
