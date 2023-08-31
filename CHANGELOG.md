@@ -1,3 +1,22 @@
+## v0.7.0 (2023-08-31)
+
+### ✨ Features
+
+- **schemas**: add User schema
+
+### 📌➕⬇️ ➖⬆️  Dependencies
+
+- upgrade packages
+- upgrade Pydantic to version 2 and add some other packages
+
+### 🗃️ Database
+
+- **models**: remove is_premiun field
+
+### 🚨 Linting
+
+- fix lint errors
+
 ## v0.6.0 (2023-08-31)
 
 ### ✨ Features
