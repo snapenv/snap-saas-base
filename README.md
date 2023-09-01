@@ -78,6 +78,7 @@ The following development environments are supported:
 - Run `poetry update` from within the development environment to upgrade all dependencies to the latest versions allowed by `pyproject.toml`.
 - Run `cz --name cz_gitmoji commit` so commit files using conventional commits with emojis.
 - Run `cz --name cz_gitmoji bump` to bump the package's version, update the `CHANGELOG.md`, and create a git tag.
+- Done 0.8.0
 - Run `git push --tags` to push new tag to repository.
 
 </details>
