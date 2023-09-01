@@ -1,3 +1,13 @@
+## v0.7.1 (2023-08-31)
+
+### 📝💡 Documentation
+
+- update version
+
+### 🔐🚧📈✏️ 💩👽️🍻💬🥚🌱🚩🥅🩺 Others
+
+- **models**: change User model to allow optional hanshed-password field
+
 ## v0.7.0 (2023-08-31)
 
 ### ✨ Features
