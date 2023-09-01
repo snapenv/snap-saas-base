@@ -76,7 +76,7 @@ class UserInDBBaseSchema(UserBaseSchema):
         description="Unique ID.",
         examples=["ckasokq6g0000yvxuigfa2agy"],
     )
-    hashed_password: str = Field(
+    hashed_password: str | None = Field(
         ...,
         title="Hashed Password",
         description="Hashed password.",
