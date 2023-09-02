@@ -1,3 +1,9 @@
+## v0.7.2 (2023-09-02)
+
+### ✨ Features
+
+- **models**: add is_premium field to User model
+
 ## v0.7.1 (2023-08-31)
 
 ### 📝💡 Documentation
