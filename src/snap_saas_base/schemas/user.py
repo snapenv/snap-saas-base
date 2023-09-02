@@ -82,10 +82,10 @@ class UserInDBBaseSchema(UserBaseSchema):
         description="Unique ID.",
         examples=["ckasokq6g0000yvxuigfa2agy"],
     )
-    hashed_password: str | None = Field(
+    password: str | None = Field(
         ...,
-        title="Hashed Password",
-        description="Hashed password.",
+        title="Password",
+        description="User password.",
         examples=["$2b$12$7ytDry1IsxATsnVwZgLeQOTAkQIPlxCfuNXPM67HQaYSGApzsYXdi"],
     )
     created_at: datetime | None = Field(
@@ -129,6 +129,7 @@ USER_EXAMPLES_PAYLOAD = {
             "cell_phone": "55279998812345",
             "avatar": "",
             "is_verified": True,
+            "is_premium": False,
             "is_active": True,
             "is_superuser": False,
             "password": "SomeGoodPassword",

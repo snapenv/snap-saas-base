@@ -17,6 +17,7 @@ class UserBaseSchemaTest(TestCase):
             "cell_phone": "55279998812345",
             "avatar": "",
             "is_verified": True,
+            "is_premium": False,
             "is_active": True,
             "is_superuser": False,
             "password": "SomeGoodPassword",
