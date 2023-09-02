@@ -49,6 +49,12 @@ class UserBaseSchema(BaseModel):
         description="User email verified.",
         examples=[False],
     )
+    is_premium: bool = Field(
+        False,
+        title="Premium",
+        description="User is premium.",
+        examples=[False],
+    )
     is_active: bool = Field(
         True,
         title="Active",

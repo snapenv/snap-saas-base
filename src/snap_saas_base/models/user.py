@@ -57,6 +57,9 @@ class User(AbstractModel):
     is_verified: so.Mapped[bool] = so.mapped_column(
         nullable=False, default=False, server_default=sa.text("false")
     )
+    is_premium: so.Mapped[bool] = so.mapped_column(
+        nullable=False, default=False, server_default=sa.text("false")
+    )
     is_active: so.Mapped[bool] = so.mapped_column(default=True, server_default=sa.text("true"))
     is_superuser: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
     phone_verified: so.Mapped[bool] = so.mapped_column(

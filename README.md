@@ -77,7 +77,7 @@ The following development environments are supported:
 - Run `poetry add {package}` from within the development environment to install a run time dependency and add it to `pyproject.toml` and `poetry.lock`. Add `--group test` or `--group dev` to install a CI or development dependency, respectively.
 - Run `poetry update` from within the development environment to upgrade all dependencies to the latest versions allowed by `pyproject.toml`.
 - Run `cz --name cz_gitmoji commit` so commit files using conventional commits with emojis.
-- Run `cz --name cz_gitmoji bump` to bump the package's version, update the `CHANGELOG.md`, and create a git tag.
+- Run `cz --name cz_gitmoji bump` out `cz --name cz_gitmoji bump --increment=patch` to bump the package's version, update the `CHANGELOG.md`, and create a git tag.
 - Done 0.8.0
 - Run `git push --tags` to push new tag to repository.
 
