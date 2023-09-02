@@ -1,3 +1,9 @@
+## v0.7.3 (2023-09-02)
+
+### ✨ Features
+
+- **model**: change fiel hashed_password to password in model User
+
 ## v0.7.2 (2023-09-02)
 
 ### ✨ Features
