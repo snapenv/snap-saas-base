@@ -1,3 +1,24 @@
+## v0.7.4 (2024-02-01)
+
+### 🐛🚑️ Fixes
+
+- **workspace.py**: convert uuid6.uuid7() to string for id generation in Workspace, WorkspaceMember, WorkspaceKv to avoid type errors ✨ feat(workspace.py): add WorkspaceApiKey and WorkspaceMetric models to support API key management and workspace metrics tracking
+- **user.py**: convert uuid6.uuid7() to string to avoid type mismatch issues
+
+### ci
+
+- **deps**: bump actions/checkout from 3 to 4
+- **deps**: bump actions/checkout from 3 to 4
+
+### 📝💡 Documentation
+
+- docs updated
+- **README.md**: clarify package installation instructions and add new tool installation guides
+
+### 🙈 Ignore
+
+- **,gitignore**: add poetry.lock to .gitignore to prevent version conflicts
+
 ## v0.7.3 (2023-09-02)
 
 ### ✨ Features
