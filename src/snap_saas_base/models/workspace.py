@@ -1,7 +1,11 @@
+from datetime import datetime
+from typing import Any
+
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 import uuid6
 from sqlalchemy.dialects.postgresql import JSONB
+from sqlalchemy.sql import func
 
 from snap_saas_base.models.base_model import AbstractModel
 
@@ -62,7 +66,7 @@ class Workspace(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
 
 
@@ -124,7 +128,7 @@ class WorkspaceMember(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
 
 
@@ -180,5 +184,172 @@ class WorkspaceKv(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
+
+
+class WorkspaceApiKey(AbstractModel):
+    """
+    A class used to represent a Workspace API key.
+
+    This class is a model for the table 'workspaces_apikeys' in the database. It includes
+    information about the API key such as the workspace_id, member_id, type, label, key,
+    value, role, and active status.
+
+    Attributes
+    ----------
+    __tablename__ : str
+        The name of the table in the database.
+    workspace_id : so.Mapped[str]
+        The ID of the workspace the API key belongs to. This is a foreign key linked to the "workspaces" table.
+    member_id : so.Mapped[str]
+        The ID of the member associated with the API key. This is a foreign key linked to the "users" table.
+    type : so.Mapped[str]
+        The type of the API key.
+    label : so.Mapped[str]
+        The label or name associated with the API key.
+    key : so.Mapped[str]
+        The key value of the API key.
+    value : so.Mapped[dict[str, str]]
+        The value associated with the API key.
+    role : so.Mapped[str]
+        The role assigned to the API key.
+    active : so.Mapped[bool]
+        The status of the API key, whether it is active or not.
+
+    Methods
+    -------
+    as_dict:
+        Returns the object as a dictionary.
+    __init__(*args, **kwargs):
+        Initializes the WorkspaceApiKey. If no id is provided, a unique id is generated.
+    """
+
+    __tablename__ = "workspaces_apikeys"
+    workspace_id: so.Mapped[str] = so.mapped_column(
+        sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
+    )
+    member_id: so.Mapped[str] = so.mapped_column(
+        sa.ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
+    type: so.Mapped[str] = so.mapped_column(nullable=False)
+    label: so.Mapped[str] = so.mapped_column(nullable=False)
+    key: so.Mapped[str] = so.mapped_column(nullable=False)
+    value: so.Mapped[dict[str, str]] = so.mapped_column(JSONB, nullable=False)
+    role: so.Mapped[str] = so.mapped_column(nullable=False)
+    active: so.Mapped[bool] = so.mapped_column(
+        nullable=False, default=True, server_default=sa.text("true")
+    )
+
+    __table_args__ = (
+        sa.UniqueConstraint("member_id", "key"),
+        sa.UniqueConstraint("key"),
+    )
+
+    @property
+    def as_dict(self):
+        """Returns the object as a dictionary.
+
+        This method uses a dictionary comprehension to iterate over the columns of the table and get the corresponding
+        attribute from the object.
+
+        Returns
+        -------
+        dict
+            A dictionary where the keys are the column names and the values are the corresponding attributes of the object.
+        """
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __init__(self, *args, **kwargs):
+        if "id" not in kwargs:
+            kwargs["id"] = str(uuid6.uuid7())
+        if "key" not in kwargs:
+            kwargs["key"] = str(uuid6.uuid7())
+
+        super(WorkspaceApiKey, self).__init__(*args, **kwargs)
+
+
+class WorkspaceMetric(AbstractModel):
+    """
+    A class used to represent a metric in a workspace.
+
+    This class is a model for the table 'workspaces_metrics' in the database. It includes
+    information about the metric such as the workspace_id, specversion, type, event_id, time,
+    source, subject, and data.
+
+    Attributes
+    ----------
+    __tablename__ : str
+        The name of the table in the database.
+    workspace_id : so.Mapped[str]
+        The ID of the workspace the metric belongs to. This is a foreign key linked to the "workspaces" table.
+    specversion : so.Mapped[str]
+        The specversion of the metric.
+    type : so.Mapped[str]
+        The type of the metric.
+    event_id : so.Mapped[str]
+        The event_id associated with the metric.
+    time : so.Mapped[datetime]
+        The time at which the metric was recorded.
+    source : so.Mapped[str]
+        The source of the metric.
+    subject : so.Mapped[str]
+        The subject of the metric.
+    data : so.Mapped[dict[str, Any]]
+        The data associated with the metric.
+
+    Methods
+    -------
+    as_dict:
+        Returns the workspace metric as a dictionary.
+    __init__(*args, **kwargs):
+        Initializes the WorkspaceMetric. If no id is provided, a unique id is generated.
+    """
+
+    __tablename__ = "workspaces_metrics"
+
+    workspace_id: so.Mapped[str] = so.mapped_column(
+        sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
+    )
+    specversion: so.Mapped[str] = so.mapped_column(nullable=False)
+    type: so.Mapped[str] = so.mapped_column(nullable=False)
+    event_id: so.Mapped[str] = so.mapped_column(nullable=False)
+    time: so.Mapped[datetime] = so.mapped_column(
+        sa.DateTime(timezone=False),
+        nullable=False,
+        default=datetime.utcnow,
+        server_default=func.now(),
+    )
+    source: so.Mapped[str] = so.mapped_column(nullable=False)
+    subject: so.Mapped[str] = so.mapped_column(nullable=False)
+    data: so.Mapped[dict[str, Any]] = so.mapped_column(JSONB, nullable=False)
+
+    __table_args__ = (
+        sa.Index("ix_workspaces_metrics_time_type", "workspace_id", "time", "type"),
+        sa.Index(
+            "ix_workspaces_metrics_type_time",
+            "workspace_id",
+            "type",
+            "time",
+        ),
+        sa.UniqueConstraint("workspace_id", "source", "event_id"),
+    )
+    __mapper_args__ = {"eager_defaults": True}
+
+    @property
+    def as_dict(self):
+        """Returns the workspace metric as a dictionary.
+
+        This method iterates over the columns of the table and gets the value of each column for the workspace metric.
+
+        Returns
+        -------
+        dict
+            A dictionary representation of the workspace.
+        """
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+    def __init__(self, *args, **kwargs):
+        if "id" not in kwargs:
+            kwargs["id"] = str(uuid6.uuid7())
+        super(WorkspaceMetric, self).__init__(*args, **kwargs)
