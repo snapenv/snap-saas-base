@@ -46,14 +46,9 @@ class Organization(AbstractModel):
         sa.ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
     revoke_link: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
-    # org_memberxx: so.WriteOnlyMapped["OrgMember"] = so.relationship(
-    #     back_populates="org", cascade="all, delete-orphan"
-    # )
-    # org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
-    org_member = so.relationship(
-        "OrgMember", back_populates="org", lazy="raise", passive_deletes=True
+    org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
+        back_populates="org", cascade="all, delete-orphan"
     )
-    # org_workspaces: so.WriteOnlyMapped["Workspace"] = so.relationship(back_populates="org", cascade="all, delete-orphan")
 
     __mapper_args__ = {"eager_defaults": True}
 
@@ -72,7 +67,7 @@ class Organization(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
 
 
@@ -115,10 +110,10 @@ class OrgMember(AbstractModel):
         sa.ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     role: so.Mapped[str] = so.mapped_column(nullable=False)
-    # member: so.Mapped["User"] = so.relationship(back_populates="org_member")
-    # org: so.Mapped["Organization"] = so.relationship(back_populates="org_member")
     org = so.relationship("Organization", back_populates="org_member", uselist=False, lazy="raise")
-    # member: so.Mapped["User"] = so.relationship(back_populates="org_member")
+    # org: so.WriteOnlyMapped["Organization"] = so.relationship(
+    #     back_populates="org_member", lazy="raise"
+    # )
 
     __mapper_args__ = {"eager_defaults": True}
 
@@ -142,5 +137,5 @@ class OrgMember(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
