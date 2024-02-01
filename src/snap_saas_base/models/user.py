@@ -81,5 +81,5 @@ class User(AbstractModel):
 
     def __init__(self, *args, **kwargs):
         if "id" not in kwargs:
-            kwargs["id"] = uuid6.uuid7()
+            kwargs["id"] = str(uuid6.uuid7())
         super().__init__(*args, **kwargs)
