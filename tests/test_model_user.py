@@ -1,4 +1,5 @@
 """Test Snap SAAS Base."""
+
 from unittest import TestCase
 
 from snap_saas_base.models.user import User
