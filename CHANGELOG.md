@@ -1,3 +1,14 @@
+## v0.7.5 (2024-02-05)
+
+### fix
+
+- delete org with member relationship
+- delete org with member relationship
+
+### 📝💡 Documentation
+
+- **README.md**: update instructions for commit and version bump using cz_gitmoji
+
 ## v0.7.4 (2024-02-01)
 
 ### 🐛🚑️ Fixes
