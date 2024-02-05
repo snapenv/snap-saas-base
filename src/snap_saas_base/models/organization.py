@@ -47,7 +47,7 @@ class Organization(AbstractModel):
     )
     revoke_link: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
     org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
-        back_populates="org", cascade="all, delete-orphan"
+        back_populates="org", cascade="all, delete-orphan", passive_deletes=True
     )
 
     __mapper_args__ = {"eager_defaults": True}
