@@ -8,6 +8,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.sql import func
 
 from snap_saas_base.models.base_model import AbstractModel
+from snap_saas_base.models.user import User
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
@@ -48,8 +49,17 @@ class Workspace(AbstractModel):
     org_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("organizations.id", ondelete="RESTRICT"), nullable=False
     )
+    org = so.relationship("Organization", uselist=False, lazy="raise")
 
     __table_args__ = (sa.UniqueConstraint("org_id", "slug"),)
+
+    async def __admin_repr__(self, request: Any = None):
+        """Return the format a Workspace will be shown in the interface."""
+        return f"{self.name}"
+
+    async def __admin_select2_repr__(self, request: Any = None) -> str:
+        """Return the format a Workspae will be shown in a select."""
+        return f"<div><span>{self.name}</span></div>"
 
     @property
     def as_dict(self):
@@ -86,6 +96,10 @@ class WorkspaceMember(AbstractModel):
         The ID of the member. This is a foreign key linked to the "users" table.
     role : so.Mapped[str]
         The role of the member in the workspace.
+    workspace : so.Mapped["Workspace"]
+        an object representing the workspace the member belongs to
+    member : so.Mapped["User"]
+        an object representing the member of the workspace
     __table_args__ : tuple
         Additional arguments for the table, such as indexes.
 
@@ -105,6 +119,8 @@ class WorkspaceMember(AbstractModel):
         sa.ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
     role: so.Mapped[str] = so.mapped_column(nullable=False)
+    workspace: so.Mapped[Workspace] = so.relationship("Workspace", uselist=False, lazy="raise")
+    member: so.Mapped[User] = so.relationship("User", uselist=False, lazy="raise")
 
     __table_args__ = (
         sa.Index(

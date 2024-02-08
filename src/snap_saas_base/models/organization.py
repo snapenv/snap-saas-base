@@ -102,6 +102,8 @@ class OrgMember(AbstractModel):
         a string representing the role of the member in the organization
     org : so.Mapped["Organization"]
         an object representing the organization the member belongs to
+    member : so.Mapped["User"]
+        an object representing the member of the organization
 
     Methods
     -------
