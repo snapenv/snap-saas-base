@@ -71,8 +71,12 @@ class User(AbstractModel):
     __table_args__ = (sa.UniqueConstraint("username", "provider"),)
 
     async def __admin_repr__(self, request: Any = None):
-        """Return the format a User will be shown in a selection."""
+        """Return the format a User will be shown in the interface."""
         return f"{self.full_name} - {self.email}"
+
+    async def __admin_select2_repr__(self, request: Any = None) -> str:
+        """Return the format a User will be shown in a select."""
+        return f"<div><span>{self.full_name} - {self.email}</span></div>"
 
     @property
     def as_dict(self):
