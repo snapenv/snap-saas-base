@@ -1,3 +1,5 @@
+from typing import Any
+
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 import uuid6
@@ -67,6 +69,10 @@ class User(AbstractModel):
     )
 
     __table_args__ = (sa.UniqueConstraint("username", "provider"),)
+
+    async def __admin_repr__(self, request: Any = None):
+        """Return the format a User will be shown in a selection."""
+        return f"{self.full_name} - {self.email}"
 
     @property
     def as_dict(self):

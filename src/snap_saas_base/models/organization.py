@@ -1,3 +1,5 @@
+from typing import Any
+
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 import uuid6
@@ -51,6 +53,10 @@ class Organization(AbstractModel):
     )
 
     __mapper_args__ = {"eager_defaults": True}
+
+    async def __admin_repr__(self, request: Any = None):
+        """Return the format a Organization will be shown in a selection."""
+        return f"{self.name}"
 
     @property
     def as_dict(self):
@@ -111,9 +117,7 @@ class OrgMember(AbstractModel):
     )
     role: so.Mapped[str] = so.mapped_column(nullable=False)
     org = so.relationship("Organization", back_populates="org_member", uselist=False, lazy="raise")
-    # org: so.WriteOnlyMapped["Organization"] = so.relationship(
-    #     back_populates="org_member", lazy="raise"
-    # )
+    member = so.relationship("User", uselist=False, lazy="raise")
 
     __mapper_args__ = {"eager_defaults": True}
 
