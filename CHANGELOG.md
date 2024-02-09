@@ -1,3 +1,16 @@
+## v0.8.0 (2024-02-09)
+
+### feat
+
+- organization user and workspace relations
+- format workspace and workspace member select
+- format org and user select
+- add member to OrgMember and format
+
+### 📝💡 Documentation
+
+- **README.md**: update command for bumping package's version to include --changelog flag for better clarity and accuracy
+
 ## v0.7.5 (2024-02-05)
 
 ### fix
