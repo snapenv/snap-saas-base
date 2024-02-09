@@ -299,6 +299,8 @@ class WorkspaceMetric(AbstractModel):
         The name of the table in the database.
     workspace_id : so.Mapped[str]
         The ID of the workspace the metric belongs to. This is a foreign key linked to the "workspaces" table.
+    workspace : so.Mapped[Workspace]
+        an object representing the workspace the metric belongs to
     specversion : so.Mapped[str]
         The specversion of the metric.
     type : so.Mapped[str]
@@ -327,6 +329,7 @@ class WorkspaceMetric(AbstractModel):
     workspace_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
     )
+    workspace: so.Mapped[Workspace] = so.relationship("Workspace", uselist=False, lazy="raise")
     specversion: so.Mapped[str] = so.mapped_column(nullable=False)
     type: so.Mapped[str] = so.mapped_column(nullable=False)
     event_id: so.Mapped[str] = so.mapped_column(nullable=False)

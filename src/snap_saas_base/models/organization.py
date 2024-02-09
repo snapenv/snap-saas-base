@@ -5,6 +5,7 @@ import sqlalchemy.orm as so
 import uuid6
 
 from snap_saas_base.models.base_model import AbstractModel
+from snap_saas_base.models.user import User
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
@@ -26,6 +27,8 @@ class Organization(AbstractModel):
         The bucket of the organization. This field cannot be null.
     created_by : so.Mapped[str]
         The user who created the organization. This field cannot be null and is a foreign key referencing the 'users' table.
+    created_by_member: so.Mapped[User]
+        And object referencing the user that created the Organization
     revoke_link : so.Mapped[bool]
         A boolean indicating whether the link to the organization has been revoked. The default value is False.
     org_member : so.WriteOnlyMapped["OrgMember"]
@@ -47,6 +50,7 @@ class Organization(AbstractModel):
     created_by: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
+    created_by_member: so.Mapped[User] = so.relationship("User", uselist=False, lazy="raise")
     revoke_link: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
     org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
         back_populates="org", cascade="all, delete-orphan", passive_deletes=True
