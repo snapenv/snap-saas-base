@@ -1,8 +1,11 @@
+from typing import Any
+
 import sqlalchemy as sa
 import sqlalchemy.orm as so
 import uuid6
 
 from snap_saas_base.models.base_model import AbstractModel
+from snap_saas_base.models.user import User
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
@@ -24,6 +27,8 @@ class Organization(AbstractModel):
         The bucket of the organization. This field cannot be null.
     created_by : so.Mapped[str]
         The user who created the organization. This field cannot be null and is a foreign key referencing the 'users' table.
+    created_by_member: so.Mapped[User]
+        And object referencing the user that created the Organization
     revoke_link : so.Mapped[bool]
         A boolean indicating whether the link to the organization has been revoked. The default value is False.
     org_member : so.WriteOnlyMapped["OrgMember"]
@@ -45,12 +50,21 @@ class Organization(AbstractModel):
     created_by: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("users.id", ondelete="RESTRICT"), nullable=False
     )
+    created_by_member: so.Mapped[User] = so.relationship("User", uselist=False, lazy="raise")
     revoke_link: so.Mapped[bool] = so.mapped_column(default=False, server_default=sa.text("false"))
     org_member: so.WriteOnlyMapped["OrgMember"] = so.relationship(
         back_populates="org", cascade="all, delete-orphan", passive_deletes=True
     )
 
     __mapper_args__ = {"eager_defaults": True}
+
+    async def __admin_repr__(self, request: Any = None):
+        """Return the format a Organization will be shown in the interface."""
+        return f"{self.name}"
+
+    async def __admin_select2_repr__(self, request: Any = None) -> str:
+        """Return the format a Organization will be shown in a select."""
+        return f"<div><span>{self.name}</span></div>"
 
     @property
     def as_dict(self):
@@ -92,6 +106,8 @@ class OrgMember(AbstractModel):
         a string representing the role of the member in the organization
     org : so.Mapped["Organization"]
         an object representing the organization the member belongs to
+    member : so.Mapped["User"]
+        an object representing the member of the organization
 
     Methods
     -------
@@ -111,9 +127,7 @@ class OrgMember(AbstractModel):
     )
     role: so.Mapped[str] = so.mapped_column(nullable=False)
     org = so.relationship("Organization", back_populates="org_member", uselist=False, lazy="raise")
-    # org: so.WriteOnlyMapped["Organization"] = so.relationship(
-    #     back_populates="org_member", lazy="raise"
-    # )
+    member = so.relationship("User", uselist=False, lazy="raise")
 
     __mapper_args__ = {"eager_defaults": True}
 
