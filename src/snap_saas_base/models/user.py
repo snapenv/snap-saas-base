@@ -76,7 +76,7 @@ class User(AbstractModel):
 
     async def __admin_select2_repr__(self, request: Any = None) -> str:
         """Return the format a User will be shown in a select."""
-        return "<div><span></span></div>"
+        return f"<div><span>{self.full_name} - {self.email}</span></div>"
 
     @property
     def as_dict(self):
