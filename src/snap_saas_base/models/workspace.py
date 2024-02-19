@@ -53,14 +53,6 @@ class Workspace(AbstractModel):
 
     __table_args__ = (sa.UniqueConstraint("org_id", "slug"),)
 
-    async def __admin_repr__(self, request: Any = None):
-        """Return the format a Workspace will be shown in the interface."""
-        return f"{self.name}"
-
-    async def __admin_select2_repr__(self, request: Any = None) -> str:
-        """Return the format a Workspae will be shown in a select."""
-        return f"<div><span>{self.name}</span></div>"
-
     @property
     def as_dict(self):
         """Returns the workspace as a dictionary.
