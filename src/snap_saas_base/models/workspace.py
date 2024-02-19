@@ -212,6 +212,10 @@ class WorkspaceApiKey(AbstractModel):
         The ID of the workspace the API key belongs to. This is a foreign key linked to the "workspaces" table.
     member_id : so.Mapped[str]
         The ID of the member associated with the API key. This is a foreign key linked to the "users" table.
+    workspace : so.Mapped["Workspace"]
+        an object representing the workspace the member belongs to
+    member : so.Mapped["User"]
+        an object representing the member of the workspace
     type : so.Mapped[str]
         The type of the API key.
     label : so.Mapped[str]
@@ -240,6 +244,8 @@ class WorkspaceApiKey(AbstractModel):
     member_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
+    workspace: so.Mapped[Workspace] = so.relationship("Workspace", uselist=False, lazy="raise")
+    member: so.Mapped[User] = so.relationship("User", uselist=False, lazy="raise")
     type: so.Mapped[str] = so.mapped_column(nullable=False)
     label: so.Mapped[str] = so.mapped_column(nullable=False)
     key: so.Mapped[str] = so.mapped_column(nullable=False)
