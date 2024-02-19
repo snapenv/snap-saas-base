@@ -1,3 +1,18 @@
+## v0.9.0 (2024-02-19)
+
+### feat
+
+- add workspace and member objects to workspaceApiKey
+
+### fix
+
+- remove admin representation
+- adjust user select format
+
+### 📝💡 Documentation
+
+- **docs**: docs update
+
 ## v0.8.0 (2024-02-09)
 
 ### feat
