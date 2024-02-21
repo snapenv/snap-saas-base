@@ -1,3 +1,14 @@
+## v0.9.1 (2024-02-21)
+
+### fix
+
+- docs and workspace relationship in WorkspaceKv
+- docs and workspace relationship in WorkspaceKv
+
+### 📝💡 Documentation
+
+- **docs**: dos update
+
 ## v0.9.0 (2024-02-19)
 
 ### feat
