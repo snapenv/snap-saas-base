@@ -31,6 +31,8 @@ class Workspace(AbstractModel):
         The bucket of the workspace. This field is nullable.
     org_id : so.Mapped[str]
         The organization id of the workspace. This field is not nullable and is a foreign key referencing the id of the organization.
+    org : so.Mapped["Organization"]
+        an object representing the organization the workspace belongs to.
     __table_args__ : tuple
         A tuple containing a unique constraint for the combination of org_id and slug.
 
@@ -155,6 +157,8 @@ class WorkspaceKv(AbstractModel):
         The name of the table in the database that this class maps to.
     workspace_id : so.Mapped[str]
         The ID of the workspace that this key-value pair belongs to.
+    workspace : so.Mapped["Workspace"]
+        an object representing the workspace the key-value pair belongs to.
     key : so.Mapped[str]
         The key in the key-value pair.
     value : so.Mapped[dict[str, str]]
@@ -172,6 +176,7 @@ class WorkspaceKv(AbstractModel):
     workspace_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
     )
+    workspace: so.Mapped[Workspace] = so.relationship("Workspace", uselist=False, lazy="raise")
     key: so.Mapped[str] = so.mapped_column(nullable=False)
     value: so.Mapped[dict[str, str]] = so.mapped_column(JSONB, nullable=False)
 
