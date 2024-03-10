@@ -31,5 +31,3 @@ class ChatMessageModelTest(TestCase):
         print("Test model object creation")
         assert isinstance(self.model_data.as_dict, dict)
         assert self.model_data.id is not None
-
-

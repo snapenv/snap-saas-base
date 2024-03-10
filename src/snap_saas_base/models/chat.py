@@ -1,10 +1,10 @@
-import uuid6
+from datetime import datetime
+from typing import Any
+
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from datetime import datetime
+import uuid6
 from sqlalchemy.dialects.postgresql import JSONB
-from typing import Any, List
-
 
 from snap_saas_base.models.base_model import AbstractModel
 
@@ -44,7 +44,7 @@ class Chat(AbstractModel):
     # messages: so.WriteOnlyMapped["ChatMessage"] = so.relationship(
     #     back_populates="chat", cascade="all, delete-orphan"
     # )
-    messages: so.Mapped[List["ChatMessage"]] = so.relationship(
+    messages: so.Mapped[list["ChatMessage"]] = so.relationship(
         lazy="selectin", back_populates="chat"
     )
     # messages = so.relationship(
