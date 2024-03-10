@@ -1,3 +1,24 @@
+## v0.10.0 (2024-03-10)
+
+### ✨ Features
+
+- **test_model_chat.py**: add unit tests for Chat and ChatMessage models to ensure correct instantiation and data handling
+- **chat.py**: add new Chat and ChatMessage models for chat functionality
+
+### ci
+
+- **deps**: bump actions/setup-python from 4 to 5
+- **deps**: bump actions/setup-python from 4 to 5
+- **deps**: bump codecov/codecov-action from 3 to 4
+- **deps**: bump codecov/codecov-action from 3 to 4
+- **deps**: bump actions/setup-node from 3 to 4
+- **deps**: bump actions/setup-node from 3 to 4
+
+### 📝💡 Documentation
+
+- **docs**: docs update
+- **docs**: docs update
+
 ## v0.9.1 (2024-02-21)
 
 ### fix
