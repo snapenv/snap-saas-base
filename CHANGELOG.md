@@ -1,3 +1,9 @@
+## v0.10.1 (2024-03-12)
+
+### fix
+
+- added workspace relationship to chat model
+
 ## v0.10.0 (2024-03-10)
 
 ### ✨ Features
