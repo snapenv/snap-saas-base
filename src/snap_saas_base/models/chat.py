@@ -7,6 +7,7 @@ import uuid6
 from sqlalchemy.dialects.postgresql import JSONB
 
 from snap_saas_base.models.base_model import AbstractModel
+from snap_saas_base.models.workspace import Workspace
 
 # https://github.com/sqlalchemy/sqlalchemy/discussions/6165
 
@@ -18,6 +19,7 @@ class Chat(AbstractModel):
     workspace_id: so.Mapped[str] = so.mapped_column(
         sa.ForeignKey("workspaces.id", ondelete="CASCADE"), nullable=False
     )
+    workspace: so.Mapped["Workspace"] = so.relationship("Workspace", uselist=False, lazy="raise")
     channel: so.Mapped[str] = so.mapped_column(nullable=False)
     channel_plugin: so.Mapped[str] = so.mapped_column(nullable=False)
     channel_id: so.Mapped[str] = so.mapped_column(nullable=False)
