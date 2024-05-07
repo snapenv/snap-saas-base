@@ -46,9 +46,7 @@ class Chat(AbstractModel):
     # messages: so.WriteOnlyMapped["ChatMessage"] = so.relationship(
     #     back_populates="chat", cascade="all, delete-orphan"
     # )
-    messages: so.Mapped[list["ChatMessage"]] = so.relationship(
-        lazy="raise", back_populates="chat"
-    )
+    messages: so.Mapped[list["ChatMessage"]] = so.relationship(lazy="raise", back_populates="chat")
     # messages = so.relationship(
     #     "ChatMessage", back_populates="chat", lazy="raise", passive_deletes=True
     # )
