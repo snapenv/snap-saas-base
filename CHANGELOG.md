@@ -1,3 +1,9 @@
+## v0.10.2 (2024-05-08)
+
+### fix
+
+- ♻️ (chat.py): refactor code by consolidating the messages relationship definition to improve readability and maintainability.
+
 ## v0.10.1 (2024-03-12)
 
 ### fix
