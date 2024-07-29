@@ -263,6 +263,7 @@ class WorkspaceApiKey(AbstractModel):
     __table_args__ = (
         sa.UniqueConstraint("member_id", "key"),
         sa.UniqueConstraint("key"),
+        sa.UniqueConstraint("workspace_id", "member_id"),
     )
 
     @property
